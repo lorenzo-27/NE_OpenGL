@@ -9,6 +9,8 @@ class FrameBuffer {
 public:
   FrameBuffer();
 
+  ~FrameBuffer();
+
   void Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal);
   void Use();
 
