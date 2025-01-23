@@ -1,12 +1,12 @@
-#version 150
+#version 330 core
 precision highp float;
 
 //Inputs
 uniform sampler2D tex;
 
 //Outputs
-out vec4 fragColor;
+out vec4 FragColor;
 
 void main(void) {
-	fragColor = vec4(1.0, 0.0, 1.0, 1.0);
+	FragColor = vec4(1.0, 0.0, 1.0, 1.0);
 }

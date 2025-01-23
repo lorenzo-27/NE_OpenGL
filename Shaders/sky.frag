@@ -1,4 +1,4 @@
-#version 150
+#version 330 core
 precision highp float;
 
 #define LIGHT vec3(0.36, 0.80, 0.48)
@@ -9,7 +9,7 @@ precision highp float;
 in vec3 ex_normal;
 
 //Outputs
-out vec4 fragColor;
+out vec4 FragColor;
 
 void main(void) {
 	vec3 n = normalize(ex_normal);
@@ -20,5 +20,5 @@ void main(void) {
 	float s = dot(n, LIGHT) - 1.0 + SUN_SIZE;
 	float sun = min(exp(s * SUN_SHARPNESS / SUN_SIZE), 1.0);
 
-	fragColor = vec4(max(sky, sun), 1.0);
+	FragColor = vec4(max(sky, sun), 1.0);
 }
