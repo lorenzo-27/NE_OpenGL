@@ -5,7 +5,7 @@
 
 class Shader {
 public:
-  Shader(const char* name);
+  explicit Shader(const char* name);
   ~Shader();
 
   void Use();

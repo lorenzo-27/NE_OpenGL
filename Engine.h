@@ -77,7 +77,7 @@ private:
   std::shared_ptr<Sky> sky;
   std::shared_ptr<Player> player;
 
-  GLint occlusionCullingSupported;
+  GLint occlusionCullingSupported{};
 
   std::vector<std::shared_ptr<Scene>> vScenes;
   std::shared_ptr<Scene> curScene;

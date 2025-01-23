@@ -222,7 +222,8 @@ void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) 
 
 void Engine::InitGLObjects() {
   //Initialize extensions
-  glewExperimental = GL_TRUE; 
+  glewExperimental = GL_TRUE;
+  printf("Status: Using GLEW %p\n", glewGetString(GLEW_VERSION));
   glewInit();
 
   //Basic global variables
