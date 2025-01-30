@@ -23,8 +23,8 @@ public:
   ~Engine();
 
   int Run();
-  void Update();
-  void Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal);
+  void Update() const;
+  void Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) const;
   void LoadScene(int ix);
 
 #if defined(_WIN32)

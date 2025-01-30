@@ -59,7 +59,7 @@ public:
 
   float Stop() {
     t2 = SDL_GetPerformanceCounter();
-    return float(t2 - t1) / frequency;
+    return static_cast<float>(t2 - t1) / frequency;
   }
 
   int64_t GetTicks() {
@@ -67,8 +67,8 @@ public:
     return t2;
   }
 
-  int64_t SecondsToTicks(float s) {
-    return int64_t(float(frequency) * s);
+  int64_t SecondsToTicks(float s) const {
+    return static_cast<int64_t>(static_cast<float>(frequency) * s);
   }
 
   float StopStart() {

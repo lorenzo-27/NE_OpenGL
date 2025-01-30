@@ -11,14 +11,14 @@ public:
 
   Tunnel(Type type) : type(type) {
     if (type == SCALE) {
-      mesh = AquireMesh("tunnel_scale.obj");
+      mesh = AcquireMesh("tunnel_scale.obj");
     } else if (type == SLOPE) {
-      mesh = AquireMesh("tunnel_slope.obj");
+      mesh = AcquireMesh("tunnel_slope.obj");
     } else {
-      mesh = AquireMesh("tunnel.obj");
+      mesh = AcquireMesh("tunnel.obj");
     }
-    shader = AquireShader("texture");
-    texture = AquireTexture("checker_gray.bmp");
+    shader = AcquireShader("texture");
+    texture = AcquireTexture("checker_gray.bmp");
   }
   virtual ~Tunnel() {}
 

@@ -6,12 +6,13 @@
 class Floorplan : public Object {
 public:
   Floorplan() {
-    mesh = AquireMesh("floorplan.obj");
-    shader = AquireShader("texture_array");
-    texture = AquireTexture("floorplan_textures.bmp", 4, 4);
+    mesh = AcquireMesh("floorplan.obj");
+    shader = AcquireShader("texture_array");
+    texture = AcquireTexture("floorplan_textures.bmp", 4, 4);
     scale = Vector3(0.1524f); //6-inches to meters
   }
-  virtual ~Floorplan() {}
+
+  ~Floorplan() override {}
 
   void AddPortals(PPortalVec& pvec) const {
     std::shared_ptr<Portal> p1(new Portal);

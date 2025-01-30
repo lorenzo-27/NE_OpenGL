@@ -39,11 +39,11 @@ FrameBuffer::~FrameBuffer() {
   glDeleteTextures(1, &texId);
 }
 
-void FrameBuffer::Use() {
+void FrameBuffer::Use() const {
   glBindTexture(GL_TEXTURE_2D, texId);
 }
 
-void FrameBuffer::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) {
+void FrameBuffer::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) const {
   glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo);
   glViewport(0, 0, GH_FBO_SIZE, GH_FBO_SIZE);
   GH_ENGINE->Render(cam, fbo, skipPortal);

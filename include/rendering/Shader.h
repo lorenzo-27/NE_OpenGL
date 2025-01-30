@@ -8,8 +8,8 @@ public:
   explicit Shader(const char* name);
   ~Shader();
 
-  void Use();
-  void SetMVP(const float* mvp, const float* mv);
+  void Use() const;
+  void SetMVP(const float* mvp, const float* mv) const;
 
 private:
   GLuint LoadShader(const char* fname, GLenum type);

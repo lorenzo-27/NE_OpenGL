@@ -26,7 +26,7 @@ public:
   virtual Physical* AsPhysical() { return nullptr; }
   const Physical* AsPhysical() const { return const_cast<Object*>(this)->AsPhysical(); }
 
-  void DebugDraw(const Camera& cam);
+  void DebugDraw(const Camera& cam) const;
 
   Matrix4 LocalToWorld() const;
   Matrix4 WorldToLocal() const;

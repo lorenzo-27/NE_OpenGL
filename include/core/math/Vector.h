@@ -175,7 +175,7 @@ public:
 
   //General
   inline void Fill(float b) {
-    std::fill(m, m + 16, b);
+    std::fill_n(m, 16, b);
   }
   inline void MakeZero() {
     Fill(0.0f);

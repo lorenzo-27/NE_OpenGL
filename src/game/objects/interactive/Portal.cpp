@@ -4,9 +4,9 @@
 #include <iostream>
 
 Portal::Portal() : front(this), back(this) {
-  mesh = AquireMesh("double_quad.obj");
-  shader = AquireShader("portal");
-  errShader = AquireShader("pink");
+  mesh = AcquireMesh("double_quad.obj");
+  shader = AcquireShader("portal");
+  errShader = AcquireShader("pink");
 }
 
 void Portal::Draw(const Camera& cam, GLuint curFBO) {
@@ -51,7 +51,7 @@ void Portal::Draw(const Camera& cam, GLuint curFBO) {
   mesh->Draw();
 }
 
-void Portal::DrawPink(const Camera& cam) {
+void Portal::DrawPink(const Camera& cam) const {
   const Matrix4 mv = LocalToWorld();
   const Matrix4 mvp = cam.Matrix() * mv;
   errShader->Use();
@@ -103,7 +103,7 @@ float Portal::DistTo(const Vector3& pt) const {
   return (v - closest).Mag();
 }
 
-void Portal::Connect(std::shared_ptr<Portal>& a, std::shared_ptr<Portal>& b) {
+void Portal::Connect(const std::shared_ptr<Portal>& a, const std::shared_ptr<Portal>& b) {
   Connect(a->front, b->back);
   Connect(b->front, a->back);
 }

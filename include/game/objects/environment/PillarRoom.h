@@ -5,9 +5,9 @@
 class PillarRoom : public Object {
 public:
   PillarRoom() {
-    mesh = AquireMesh("pillar_room.obj");
-    shader = AquireShader("texture");
-    texture = AquireTexture("three_room.bmp");
+    mesh = AcquireMesh("pillar_room.obj");
+    shader = AcquireShader("texture");
+    texture = AcquireTexture("three_room.bmp");
     scale = Vector3(1.1f);
   }
 
@@ -17,5 +17,5 @@ public:
     portal.euler.y -= GH_PI / 2;
     portal.scale = Vector3(1, 1.5f, 1) * scale;
   }
-  virtual ~PillarRoom() {}
+  ~PillarRoom() override {}
 };

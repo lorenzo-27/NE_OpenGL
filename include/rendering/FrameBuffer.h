@@ -11,8 +11,8 @@ public:
 
   ~FrameBuffer();
 
-  void Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal);
-  void Use();
+  void Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) const;
+  void Use() const;
 
 private:
   GLuint texId;

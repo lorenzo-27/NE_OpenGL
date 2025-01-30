@@ -23,16 +23,17 @@ public:
   };
 
   Portal();
-  virtual ~Portal() {}
+
+  ~Portal() override {}
 
   virtual void Draw(const Camera& cam, GLuint curFBO) override;
-  void DrawPink(const Camera& cam);
+  void DrawPink(const Camera& cam) const;
 
   Vector3 GetBump(const Vector3& a) const;
   const Warp* Intersects(const Vector3& a, const Vector3& b, const Vector3& bump) const;
   float DistTo(const Vector3& pt) const;
 
-  static void Connect(std::shared_ptr<Portal>& a, std::shared_ptr<Portal>& b);
+  static void Connect(const std::shared_ptr<Portal>& a, const std::shared_ptr<Portal>& b);
   static void Connect(Warp& a, Warp& b);
 
   Warp front;

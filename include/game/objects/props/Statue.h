@@ -5,9 +5,10 @@
 class Statue : public Object {
 public:
   Statue(const char* model) {
-    mesh = AquireMesh(model);
-    shader = AquireShader("texture");
-    texture = AquireTexture("gold.bmp");
+    mesh = AcquireMesh(model);
+    shader = AcquireShader("texture");
+    texture = AcquireTexture("gold.bmp");
   }
-  virtual ~Statue() {}
+
+  ~Statue() override {}
 };

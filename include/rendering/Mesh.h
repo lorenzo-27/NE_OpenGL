@@ -12,7 +12,7 @@ public:
   explicit Mesh(const char* fname);
   ~Mesh();
 
-  void Draw();
+  void Draw() const;
 
   void DebugDraw(const Camera& cam, const Matrix4& objMat);
 

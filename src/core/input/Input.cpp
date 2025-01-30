@@ -54,8 +54,8 @@ void Input::UpdateRaw(const tagRAWINPUT* raw) {
 #else
 
 void Input::UpdateRaw(unsigned state,int mouse_x,int mouse_y) {
-  mouse_dx = (float)mouse_x;
-  mouse_dy = (float)mouse_y;
+  mouse_dx = static_cast<float>(mouse_x);
+  mouse_dy = static_cast<float>(mouse_y);
   mouse_ddx += mouse_dx;
   mouse_ddy += mouse_dy;
   if (state & SDL_BUTTON_LMASK) {

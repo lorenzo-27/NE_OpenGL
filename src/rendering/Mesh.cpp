@@ -41,7 +41,7 @@ Mesh::Mesh(const char* fname) {
     } else if (line.find("c ") == 0) {
       uint32_t a = 0, b = 0, c = 0;
       if (line[2] == '*') {
-        const uint32_t v_ix = (uint32_t)vert_palette.size() / 3;
+        const uint32_t v_ix = static_cast<uint32_t>(vert_palette.size()) / 3;
         a = v_ix - 2; b = v_ix - 1; c = v_ix;
       } else {
         std::stringstream ss(line.c_str() + 2);
@@ -78,8 +78,8 @@ Mesh::Mesh(const char* fname) {
       //Interpret face based on slash
       if (wild) {
         assert(num_slashes == 0);
-        const uint32_t v_ix = (uint32_t)vert_palette.size() / 3;
-        const uint32_t t_ix = (uint32_t)uv_palette.size() / (is3DTex ? 3 : 2);
+        const uint32_t v_ix = static_cast<uint32_t>(vert_palette.size()) / 3;
+        const uint32_t t_ix = static_cast<uint32_t>(uv_palette.size()) / (is3DTex ? 3 : 2);
         if (wild2) {
           a = v_ix - 3; b = v_ix - 2; c = v_ix - 1; d = v_ix - 0;
           at = t_ix - 3; bt = t_ix - 2; ct = t_ix - 1; dt = t_ix - 0;
@@ -136,19 +136,19 @@ Mesh::Mesh(const char* fname) {
     glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
     glBufferData(GL_ARRAY_BUFFER, verts.size() * sizeof(verts[0]), verts.data(), GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
   }
   {
     glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
     glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(uvs[0]), uvs.data(), GL_STATIC_DRAW);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, (is3DTex ? 3 : 2), GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribPointer(1, (is3DTex ? 3 : 2), GL_FLOAT, GL_FALSE, 0, nullptr);
   }
   {
     glBindBuffer(GL_ARRAY_BUFFER, vbo[2]);
     glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(normals[0]), normals.data(), GL_STATIC_DRAW);
     glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
   }
 }
 
@@ -157,9 +157,9 @@ Mesh::~Mesh() {
   glDeleteVertexArrays(1, &vao);
 }
 
-void Mesh::Draw() {
+void Mesh::Draw() const {
   glBindVertexArray(vao);
-  glDrawArrays(GL_TRIANGLES, 0, (GLsizei)verts.size());
+  glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(verts.size()));
 }
 
 void Mesh::DebugDraw(const Camera& cam, const Matrix4& objMat) {

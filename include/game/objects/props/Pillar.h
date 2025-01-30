@@ -5,10 +5,11 @@
 class Pillar : public Object {
 public:
   Pillar() {
-    mesh = AquireMesh("pillar.obj");
-    shader = AquireShader("texture");
-    texture = AquireTexture("white.bmp");
+    mesh = AcquireMesh("pillar.obj");
+    shader = AcquireShader("texture");
+    texture = AcquireTexture("white.bmp");
     scale = Vector3(0.1f);
   }
-  virtual ~Pillar() {}
+
+  ~Pillar() override {}
 };

@@ -29,12 +29,12 @@ bool Collider::Collide(const Matrix4& localToUnit, Vector3& delta) const {
   const Vector3 x = local.XAxis();
   const Vector3 y = local.YAxis();
 
-  //Find closest point
+  //Find the closest point
   const float px = GH_CLAMP(v.Dot(x) / x.MagSq(), -1.0f, 1.0f);
   const float py = GH_CLAMP(v.Dot(y) / y.MagSq(), -1.0f, 1.0f);
   const Vector3 closest = x*px + y*py;
 
-  //Calculate distance to closest point
+  //Calculate distance to the closest point
   delta = v - closest;
   if (delta.MagSq() >= 1.0f) {
     return false;
@@ -44,16 +44,15 @@ bool Collider::Collide(const Matrix4& localToUnit, Vector3& delta) const {
   }
 }
 
-void Collider::DebugDraw(const Camera& cam, const Matrix4& objMat) {
+void Collider::DebugDraw(const Camera& cam, const Matrix4& objMat) const {
   glDepthFunc(GL_ALWAYS);
   glUseProgram(0);
   glBegin(GL_LINE_LOOP);
   glColor3f(0.0f, 1.0f, 0.0f);
 
   const Matrix4 m = cam.Matrix() * objMat * mat;
-  Vector4 v;
 
-  v = m * Vector4(1, 1, 0, 1);
+  Vector4 v = m * Vector4(1, 1, 0, 1);
   glVertex4f(v.x, v.y, v.z, v.w);
   v = m * Vector4(1, -1, 0, 1);
   glVertex4f(v.x, v.y, v.z, v.w);

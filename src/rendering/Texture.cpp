@@ -68,7 +68,7 @@ Texture::~Texture() {
   glDeleteTextures(1, &texId);
 }
 
-void Texture::Use() {
+void Texture::Use() const {
   if (is3D) {
     glBindTexture(GL_TEXTURE_2D_ARRAY, texId);
   } else {

@@ -14,6 +14,7 @@
 #include <cmath>
 #include <iostream>
 #include <algorithm>
+#include <memory>
 
 Engine* GH_ENGINE = nullptr;
 Player* GH_PLAYER = nullptr;
@@ -32,12 +33,12 @@ Engine::Engine() {
   InitGLObjects();
   SetupInputs();
 
-  player.reset(new Player);
+  player = std::make_shared<Player>();
   GH_PLAYER = player.get();
 
   vScenes.push_back(std::shared_ptr<Scene>(new Level1));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level2(3)));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level2(6)));
+  vScenes.push_back(std::make_shared<Level2>(3));
+  vScenes.push_back(std::make_shared<Level2>(6));
   vScenes.push_back(std::shared_ptr<Scene>(new Level3));
   vScenes.push_back(std::shared_ptr<Scene>(new Level4));
   vScenes.push_back(std::shared_ptr<Scene>(new Level5));
@@ -94,7 +95,7 @@ void Engine::LoadScene(int ix) {
   vObjects.push_back(player);
 }
 
-void Engine::Update() {
+void Engine::Update() const {
   //Update
   for (size_t i = 0; i < vObjects.size(); ++i) {
     assert(vObjects[i].get());
@@ -116,7 +117,7 @@ void Engine::Update() {
 
       //For each hit sphere
       for (size_t s = 0; s < physical->hitSpheres.size(); ++s) {
-        //Brings point from collider's local coordinates to hits's local coordinates.
+        //Brings point from colliders local coordinates to hit's local coordinates.
         const Sphere& sphere = physical->hitSpheres[s];
         Matrix4 worldToUnit = sphere.LocalToUnit() * worldToLocal;
         Matrix4 localToUnit = worldToUnit * obj.LocalToWorld();
@@ -155,7 +156,7 @@ void Engine::Update() {
   }
 }
 
-void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) {
+void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) const {
   //Clear buffers
   if (GH_USE_SKY) {
     glClear(GL_DEPTH_BUFFER_BIT);
@@ -169,7 +170,7 @@ void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) 
   GLuint drawTest[GH_MAX_PORTALS];
   assert(vPortals.size() <= GH_MAX_PORTALS);
   if (occlusionCullingSupported) {
-    glGenQueriesARB((GLsizei)vPortals.size(), queries);
+    glGenQueriesARB(static_cast<GLsizei>(vPortals.size()), queries);
   }
 
   //Draw scene
@@ -198,7 +199,7 @@ void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) 
       };
       glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
       glDepthMask(GL_TRUE);
-      glDeleteQueriesARB((GLsizei)vPortals.size(), queries);
+      glDeleteQueriesARB(static_cast<GLsizei>(vPortals.size()), queries);
     }
     for (size_t i = 0; i < vPortals.size(); ++i) {
       if (vPortals[i].get() != skipPortal) {

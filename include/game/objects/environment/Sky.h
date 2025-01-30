@@ -5,11 +5,11 @@
 class Sky {
 public:
   Sky() {
-    mesh = AquireMesh("quad.obj");
-    shader = AquireShader("sky");
+    mesh = AcquireMesh("quad.obj");
+    shader = AcquireShader("sky");
   }
 
-  void Draw(const Camera& cam) {
+  void Draw(const Camera& cam) const {
     glDepthMask(GL_FALSE);
     const Matrix4 mvp = cam.projection.Inverse();
     const Matrix4 mv = cam.worldView.Inverse();

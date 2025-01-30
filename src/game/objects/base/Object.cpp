@@ -42,7 +42,7 @@ Matrix4 Object::WorldToLocal() const {
   return Matrix4::Scale(1.0f / (scale * p_scale)) * Matrix4::RotZ(-euler.z) * Matrix4::RotX(-euler.x) * Matrix4::RotY(-euler.y) * Matrix4::Trans(-pos);
 }
 
-void Object::DebugDraw(const Camera& cam) {
+void Object::DebugDraw(const Camera& cam) const {
   if (mesh) {
     mesh->DebugDraw(cam, LocalToWorld());
   }

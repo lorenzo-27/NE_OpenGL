@@ -18,7 +18,7 @@ Shader::Shader(const char* name) {
 
   //Bind variables
   for (size_t i = 0; i < attribs.size(); ++i) {
-    glBindAttribLocation(progId, (GLuint)i, attribs[i].c_str());
+    glBindAttribLocation(progId, static_cast<GLuint>(i), attribs[i].c_str());
   }
 
   //Link the program
@@ -55,7 +55,7 @@ Shader::~Shader() {
   glDeleteShader(fragId);
 }
 
-void Shader::Use() {
+void Shader::Use() const {
   glUseProgram(progId);
 }
 
@@ -69,7 +69,7 @@ GLuint Shader::LoadShader(const char* fname, GLenum type) {
 
   //Create and compile shader
   const GLuint id = glCreateShader(type);
-  glShaderSource(id, 1, (const GLchar**)&source, 0);
+  glShaderSource(id, 1, (const GLchar**)&source, nullptr);
   glCompileShader(id);
 
   //Check to make sure there were no errors
@@ -98,7 +98,7 @@ GLuint Shader::LoadShader(const char* fname, GLenum type) {
       }
       ix = str.find(";", ix);
       size_t start_ix = ix;
-      while (str[--start_ix] != ' ');
+      while (str[--start_ix] != ' ') {}
       attribs.push_back(str.substr(start_ix + 1, ix - start_ix - 1));
     }
   }
@@ -107,7 +107,7 @@ GLuint Shader::LoadShader(const char* fname, GLenum type) {
   return id;
 }
 
-void Shader::SetMVP(const float* mvp, const float* mv) {
+void Shader::SetMVP(const float* mvp, const float* mv) const {
   if (mvp) glUniformMatrix4fv(mvpId, 1, GL_TRUE, mvp);
   if (mv) glUniformMatrix4fv(mvId, 1, GL_TRUE, mv);
 }
