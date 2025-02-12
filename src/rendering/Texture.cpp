@@ -1,4 +1,4 @@
-#include "../../include/rendering/Texture.h"
+#include "rendering/Texture.h"
 #include <fstream>
 #include <cassert>
 

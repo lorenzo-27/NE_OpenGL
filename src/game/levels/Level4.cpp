@@ -1,6 +1,6 @@
-#include "../../../include/game/levels/Level4.h"
-#include "../../../include/game/objects/props/Tunnel.h"
-#include "../../../include/game/objects/environment/Ground.h"
+#include "game/levels/Level4.h"
+#include "game/objects/props/Tunnel.h"
+#include "game/objects/environment/Ground.h"
 
 void Level4::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
   std::shared_ptr<Tunnel> tunnel1(new Tunnel(Tunnel::SLOPE));

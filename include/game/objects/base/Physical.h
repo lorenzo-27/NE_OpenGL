@@ -1,7 +1,7 @@
 #pragma once
-#include "Object.h"
-#include "../interactive/Portal.h"
-#include "../props/Sphere.h"
+#include "game/objects/base/Object.h"
+#include "game/objects/interactive/Portal.h"
+#include "game/objects/props/Sphere.h"
 
 class Physical : public Object {
 public:

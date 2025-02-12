@@ -1,6 +1,6 @@
 #pragma once
-#include "../../../resources/Resources.h"
-#include "../../../core/math/Vector.h"
+#include "resources/Resources.h"
+#include "core/math/Vector.h"
 
 class Sky {
 public:

@@ -1,7 +1,7 @@
-#include "../../../../include/game/objects/base/Object.h"
-#include "../../../../include/rendering/Mesh.h"
-#include "../../../../include/rendering/Shader.h"
-#include "../../../../include/rendering/Texture.h"
+#include "game/objects/base/Object.h"
+#include "rendering/Mesh.h"
+#include "rendering/Shader.h"
+#include "rendering/Texture.h"
 
 Object::Object() :
   pos(0.0f),

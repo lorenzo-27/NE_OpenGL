@@ -1,7 +1,7 @@
 #pragma once
-#include "objects/base/Object.h"
-#include "objects/interactive/Portal.h"
-#include "objects/interactive/Player.h"
+#include "game/objects/base/Object.h"
+#include "game/objects/interactive/Portal.h"
+#include "game/objects/interactive/Player.h"
 
 class Scene {
 public:

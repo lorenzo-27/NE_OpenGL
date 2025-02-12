@@ -1,8 +1,8 @@
 #pragma once
-#include "../../../core/engine/GameHeader.h"
-#include "../../../core/math/Vector.h"
-#include "../../../core/camera/Camera.h"
-#include "../props/Sphere.h"
+#include "core/engine/GameHeader.h"
+#include "core/math/Vector.h"
+#include "core/camera/Camera.h"
+#include "game/objects/props/Sphere.h"
 #include <vector>
 #include <memory>
 

@@ -1,6 +1,6 @@
 #pragma once
-#include "../core/math/Collider.h"
-#include "../core/camera/Camera.h"
+#include "core/math/Collider.h"
+#include "core/camera/Camera.h"
 #include <GL/glew.h>
 #include <vector>
 #include <map>

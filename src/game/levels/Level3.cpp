@@ -1,8 +1,8 @@
-#include "../../../include/game/levels/Level3.h"
-#include "../../../include/game/objects/props/Pillar.h"
-#include "../../../include/game/objects/environment/Ground.h"
-#include "../../../include/game/objects/props/Statue.h"
-#include "../../../include/game/objects/environment/PillarRoom.h"
+#include "game/levels/Level3.h"
+#include "game/objects/props/Pillar.h"
+#include "game/objects/environment/Ground.h"
+#include "game/objects/props/Statue.h"
+#include "game/objects/environment/PillarRoom.h"
 
 void Level3::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
   //Room 1

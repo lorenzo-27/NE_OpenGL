@@ -1,5 +1,5 @@
 #pragma once
-#include "../core/camera/Camera.h"
+#include "core/camera/Camera.h"
 #include <GL/glew.h>
 
 //Forward declaration

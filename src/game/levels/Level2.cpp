@@ -1,5 +1,5 @@
-#include "../../../include/game/levels/Level2.h"
-#include "../../../include/game/objects/environment/House.h"
+#include "game/levels/Level2.h"
+#include "game/objects/environment/House.h"
 
 void Level2::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
   std::shared_ptr<House> house1(new House("three_room.bmp"));

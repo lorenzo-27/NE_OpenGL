@@ -1,5 +1,5 @@
-#include "../../../../include/game/objects/base/Physical.h"
-#include "../../../../include/core/engine/GameHeader.h"
+#include "game/objects/base/Physical.h"
+#include "core/engine/GameHeader.h"
 
 Physical::Physical() {
   Reset();

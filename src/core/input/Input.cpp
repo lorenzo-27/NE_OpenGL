@@ -1,5 +1,5 @@
-#include "../../../include/core/input/Input.h"
-#include "../../../include/core/engine/GameHeader.h"
+#include "core/input/Input.h"
+#include "core/engine/GameHeader.h"
 #if defined(_WIN32)
   #include <Windows.h>
 #else

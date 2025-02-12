@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../core/math/Vector.h"
+#include "core/math/Vector.h"
 #include <cassert>
 
 class Sphere {

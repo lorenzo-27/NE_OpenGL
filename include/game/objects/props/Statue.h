@@ -1,6 +1,6 @@
 #pragma once
-#include "../base/Object.h"
-#include "../../../resources/Resources.h"
+#include "game/objects/base/Object.h"
+#include "resources/Resources.h"
 
 class Statue : public Object {
 public:

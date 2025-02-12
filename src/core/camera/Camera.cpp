@@ -1,5 +1,5 @@
-#include "../../../include/core/camera/Camera.h"
-#include "../../../include/core/engine/GameHeader.h"
+#include "core/camera/Camera.h"
+#include "core/engine/GameHeader.h"
 #include <GL/glew.h>
 #include <cmath>
 

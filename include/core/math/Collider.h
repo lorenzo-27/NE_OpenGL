@@ -1,6 +1,6 @@
 #pragma once
 #include "Vector.h"
-#include "../camera/Camera.h"
+#include "core/camera/Camera.h"
 
 class Collider {
 public:

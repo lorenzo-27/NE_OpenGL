@@ -1,7 +1,7 @@
 #if defined(_WIN32)
 #define _CRT_SECURE_NO_WARNINGS
 #endif
-#include "../include/core/engine/Engine.h"
+#include "core/engine/Engine.h"
 
 #if defined(_WIN32)
 

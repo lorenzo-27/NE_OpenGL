@@ -1,4 +1,4 @@
-#include "../../include/resources/Resources.h"
+#include "resources/Resources.h"
 #include <unordered_map>
 
 std::shared_ptr<Mesh> AcquireMesh(const char* name) {

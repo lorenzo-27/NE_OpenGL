@@ -1,5 +1,5 @@
-#include "../../include/rendering/Mesh.h"
-#include "../../include/core/math/Vector.h"
+#include "rendering/Mesh.h"
+#include "core/math/Vector.h"
 #include <fstream>
 #include <sstream>
 #include <string>

@@ -1,6 +1,6 @@
 #pragma once
-#include "../../../core/math/Vector.h"
-#include "../base/Physical.h"
+#include "core/math/Vector.h"
+#include "game/objects/base/Physical.h"
 
 class Player : public Physical {
 public:

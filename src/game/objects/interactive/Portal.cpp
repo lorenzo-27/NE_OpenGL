@@ -1,5 +1,5 @@
-#include "../../../../include/game/objects/interactive/Portal.h"
-#include "../../../../include/core/engine/Engine.h"
+#include "game/objects/interactive/Portal.h"
+#include "core/engine/Engine.h"
 #include <cassert>
 #include <iostream>
 

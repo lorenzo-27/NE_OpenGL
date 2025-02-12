@@ -1,6 +1,6 @@
-#include "../../include/rendering/FrameBuffer.h"
-#include "../../include/core/engine/GameHeader.h"
-#include "../../include/core/engine/Engine.h"
+#include "rendering/FrameBuffer.h"
+#include "core/engine/GameHeader.h"
+#include "core/engine/Engine.h"
 #include <iostream>
 
 FrameBuffer::FrameBuffer() {

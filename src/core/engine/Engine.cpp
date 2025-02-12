@@ -1,11 +1,11 @@
-#include "../../../include/core/engine/Engine.h"
-#include "../../../include/game/objects/base/Physical.h"
-#include "../../../include/game/levels/Level1.h"
-#include "../../../include/game/levels/Level2.h"
-#include "../../../include/game/levels/Level3.h"
-#include "../../../include/game/levels/Level4.h"
-#include "../../../include/game/levels/Level5.h"
-#include "../../../include/game/levels/Level6.h"
+#include "core/engine/Engine.h"
+#include "game/objects/base/Physical.h"
+#include "game/levels/Level1.h"
+#include "game/levels/Level2.h"
+#include "game/levels/Level3.h"
+#include "game/levels/Level4.h"
+#include "game/levels/Level5.h"
+#include "game/levels/Level6.h"
 #if defined(_WIN32)
   #include <GL/wglew.h>
 #else

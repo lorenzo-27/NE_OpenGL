@@ -1,5 +1,5 @@
-#include "../../../include/core/math/Collider.h"
-#include "../../../include/core/engine/GameHeader.h"
+#include "core/math/Collider.h"
+#include "core/engine/GameHeader.h"
 #include "GL/glew.h"
 #include <cassert>
 #include <iostream>

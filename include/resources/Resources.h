@@ -1,7 +1,7 @@
 #pragma once
-#include "../rendering/Mesh.h"
-#include "../rendering/Texture.h"
-#include "../rendering/Shader.h"
+#include "rendering/Mesh.h"
+#include "rendering/Texture.h"
+#include "rendering/Shader.h"
 #include <memory>
 
 std::shared_ptr<Mesh> AcquireMesh(const char* name);
