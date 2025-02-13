@@ -4,8 +4,8 @@
 #pragma warning(disable : 4099) // Missing PDB file
 
 //Windows
-static constexpr char GH_TITLE[] = "NonEuclideanDemo";
-static constexpr char GH_CLASS[] = "NED";
+static constexpr char GH_TITLE[] = "Non Euclidean OpenGL";
+static constexpr char GH_CLASS[] = "NE_OpenGL";
 
 //General
 static constexpr float GH_PI = 3.141592653589793f;
@@ -19,7 +19,7 @@ static constexpr int GH_SCREEN_WIDTH = 1280;
 static constexpr int GH_SCREEN_HEIGHT = 720;
 static constexpr int GH_SCREEN_X = 50;
 static constexpr int GH_SCREEN_Y = 50;
-static constexpr float GH_FOV = 60.0f;
+static constexpr float GH_FOV = 90.0f;
 static constexpr float GH_NEAR_MIN = 1e-3f;
 static constexpr float GH_NEAR_MAX = 1e-1f;
 static constexpr float GH_FAR = 100.0f;

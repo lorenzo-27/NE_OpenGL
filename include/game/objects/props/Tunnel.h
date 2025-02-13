@@ -18,7 +18,7 @@ public:
       mesh = AcquireMesh("tunnel.obj");
     }
     shader = AcquireShader("texture");
-    texture = AcquireTexture("checker_gray.bmp");
+    texture = AcquireTexture("tunnel.bmp");
   }
   virtual ~Tunnel() {}
 

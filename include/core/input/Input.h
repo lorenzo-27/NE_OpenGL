@@ -24,13 +24,4 @@ public:
   float mouse_dy;
   float mouse_ddx;
   float mouse_ddy;
-
-  //Joystick
-  //TODO:
-
-  //Bindings
-  //TODO:
-
-  //Calibration
-  //TODO:
 };

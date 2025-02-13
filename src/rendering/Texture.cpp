@@ -23,7 +23,7 @@ Texture::Texture(const char* fname, int rows, int cols) {
   assert(height % rows == 0);
   const int block_w = width / cols;
   const int block_h = height / rows;
-  uint8_t* img = new uint8_t[width * height * 3];
+  auto* img = new uint8_t[width * height * 3];
   for (int y = height; y--> 0;) {
     const int row = y / block_h;
     const int ty = y % block_h;
@@ -60,7 +60,7 @@ Texture::Texture(const char* fname, int rows, int cols) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, img);
   }
 
-  //Clenup
+  //Cleanup
   delete[] img;
 }
 
