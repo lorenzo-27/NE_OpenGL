@@ -122,10 +122,10 @@ int Engine::EnterMessageLoop() {
       else if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
         auto keycode = event.key.keysym.sym;
         auto mod = event.key.keysym.mod;
-        if (keycode == SDLK_ESCAPE) {
+        if (keycode == SDLK_q) {
           return 0;
         }
-        else if (keycode == SDLK_RETURN && (mod & KMOD_LALT || mod & KMOD_RALT)  ) {
+        else if (keycode == SDLK_f) {
           ToggleFullscreen();
         }
         else if (keycode >= 'a' && keycode <= 'z')

@@ -53,13 +53,13 @@ LRESULT Engine::WindowProc(HWND hCurWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
     if (lParam & 0x40000000) { return 0; }
     input.key[wParam & 0xFF] = true;
     input.key_press[wParam & 0xFF] = true;
-    if (wParam == VK_ESCAPE) {
+    if (wParam == VK_Q) {
       PostQuitMessage(0);
     }
     return 0;
 
   case WM_SYSKEYDOWN:
-    if (wParam == VK_RETURN) {
+    if (wParam == VK_F) {
       ToggleFullscreen();
       return 0;
     }
