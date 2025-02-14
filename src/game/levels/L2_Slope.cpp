@@ -1,8 +1,8 @@
-#include "game/levels/L2_UpDown.h"
+#include "game/levels/L2_Slope.h"
 #include "game/objects/props/Tunnel.h"
 #include "game/objects/environment/Ground.h"
 
-void L2_UpDown::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
+void L2_Slope::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
   std::shared_ptr<Tunnel> tunnel1(new Tunnel(Tunnel::SLOPE));
   tunnel1->pos = Vector3(0, 0, 0);
   tunnel1->scale = Vector3(1, 1, 5);

@@ -2,8 +2,8 @@
 #include "game/objects/base/Physical.h"
 #include "game/levels/L1_DoubleTunnel.h"
 #include "game/levels/L4_House.h"
-#include "game/levels/L2_UpDown.h"
-#include "game/levels/L3_SmallBig.h"
+#include "game/levels/L2_Slope.h"
+#include "game/levels/L3_Scale.h"
 #if defined(_WIN32)
   #include <GL/wglew.h>
 #else
@@ -35,8 +35,8 @@ Engine::Engine() {
   GH_PLAYER = player.get();
 
   vScenes.push_back(std::shared_ptr<Scene>(new L1_DoubleTunnel));
-  vScenes.push_back(std::shared_ptr<Scene>(new L2_UpDown));
-  vScenes.push_back(std::shared_ptr<Scene>(new L3_SmallBig));
+  vScenes.push_back(std::shared_ptr<Scene>(new L2_Slope));
+  vScenes.push_back(std::shared_ptr<Scene>(new L3_Scale));
   vScenes.push_back(std::make_shared<L4_House>(3));
   vScenes.push_back(std::make_shared<L4_House>(6));
 

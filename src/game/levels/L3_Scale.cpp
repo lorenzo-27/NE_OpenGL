@@ -1,8 +1,8 @@
-#include "game/levels/L3_SmallBig.h"
+#include "game/levels/L3_Scale.h"
 #include "game/objects/props/Tunnel.h"
 #include "game/objects/environment/Ground.h"
 
-void L3_SmallBig::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
+void L3_Scale::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
   std::shared_ptr<Tunnel> tunnel1(new Tunnel(Tunnel::SCALE));
   tunnel1->pos = Vector3(-1.2f, 0, 0);
   tunnel1->scale = Vector3(1, 1, 2.4f);

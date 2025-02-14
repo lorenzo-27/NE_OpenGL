@@ -2,8 +2,8 @@
 #include "game/objects/base/Physical.h"
 #include "game/levels/L1_DoubleTunnel.h"
 #include "game/levels/L4_House.h"
-#include "game/levels/L2_UpDown.h"
-#include "game/levels/L3_SmallBig.h"
+#include "game/levels/L2_Slope.h"
+#include "game/levels/L3_Scale.h"
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <cmath>
