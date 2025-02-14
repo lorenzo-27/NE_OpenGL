@@ -1,11 +1,9 @@
 #include "core/engine/Engine.h"
 #include "game/objects/base/Physical.h"
-#include "game/levels/Level1.h"
-#include "game/levels/Level2.h"
-#include "game/levels/Level3.h"
-#include "game/levels/Level4.h"
-#include "game/levels/Level5.h"
-#include "game/levels/Level6.h"
+#include "game/levels/L1_DoubleTunnel.h"
+#include "game/levels/L4_House.h"
+#include "game/levels/L2_UpDown.h"
+#include "game/levels/L3_SmallBig.h"
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <cmath>
@@ -163,10 +161,6 @@ int Engine::EnterMessageLoop() {
       LoadScene(3);
     } else if (input.key_press['5']) {
       LoadScene(4);
-    } else if (input.key_press['6']) {
-      LoadScene(5);
-    } else if (input.key_press['7']) {
-      LoadScene(6);
     }
 
     PeriodicRender(cur_ticks);

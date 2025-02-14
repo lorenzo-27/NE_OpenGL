@@ -1,8 +1,8 @@
-#include "game/levels/Level1.h"
+#include "game/levels/L1_DoubleTunnel.h"
 #include "game/objects/props/Tunnel.h"
 #include "game/objects/environment/Ground.h"
 
-void Level1::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
+void L1_DoubleTunnel::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
   std::shared_ptr<Tunnel> tunnel1(new Tunnel(Tunnel::NORMAL));
   tunnel1->pos = Vector3(-2.4f, 0, -1.8f);
   tunnel1->scale = Vector3(1, 1, 4.8f);

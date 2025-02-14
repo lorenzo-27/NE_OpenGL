@@ -1,12 +1,7 @@
 #pragma once
 #include "game/Scene.h"
 
-class Level2 : public Scene {
+class L1_DoubleTunnel : public Scene {
 public:
-  Level2(int rooms) : num_rooms(rooms) {}
-
   virtual void Load(PObjectVec& objs, PPortalVec& portals, Player& player) override;
-
-private:
-  int num_rooms;
 };

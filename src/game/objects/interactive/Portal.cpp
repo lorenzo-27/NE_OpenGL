@@ -94,12 +94,12 @@ float Portal::DistTo(const Vector3& pt) const {
   const Vector3 x = localToWorld.XAxis();
   const Vector3 y = localToWorld.YAxis();
 
-  //Find closest point
+  //Find the closest point
   const float px = GH_CLAMP(v.Dot(x) / x.MagSq(), -1.0f, 1.0f);
   const float py = GH_CLAMP(v.Dot(y) / y.MagSq(), -1.0f, 1.0f);
   const Vector3 closest = x*px + y*py;
 
-  //Calculate distance to closest point
+  //Calculate distance to the closest point
   return (v - closest).Mag();
 }
 

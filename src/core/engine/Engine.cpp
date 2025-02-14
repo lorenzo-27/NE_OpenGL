@@ -1,11 +1,9 @@
 #include "core/engine/Engine.h"
 #include "game/objects/base/Physical.h"
-#include "game/levels/Level1.h"
-#include "game/levels/Level2.h"
-#include "game/levels/Level3.h"
-#include "game/levels/Level4.h"
-#include "game/levels/Level5.h"
-#include "game/levels/Level6.h"
+#include "game/levels/L1_DoubleTunnel.h"
+#include "game/levels/L4_House.h"
+#include "game/levels/L2_UpDown.h"
+#include "game/levels/L3_SmallBig.h"
 #if defined(_WIN32)
   #include <GL/wglew.h>
 #else
@@ -36,13 +34,11 @@ Engine::Engine() {
   player = std::make_shared<Player>();
   GH_PLAYER = player.get();
 
-  vScenes.push_back(std::shared_ptr<Scene>(new Level1));
-  vScenes.push_back(std::make_shared<Level2>(3));
-  vScenes.push_back(std::make_shared<Level2>(6));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level3));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level4));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level5));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level6));
+  vScenes.push_back(std::shared_ptr<Scene>(new L1_DoubleTunnel));
+  vScenes.push_back(std::shared_ptr<Scene>(new L2_UpDown));
+  vScenes.push_back(std::shared_ptr<Scene>(new L3_SmallBig));
+  vScenes.push_back(std::make_shared<L4_House>(3));
+  vScenes.push_back(std::make_shared<L4_House>(6));
 
   LoadScene(0);
 

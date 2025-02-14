@@ -1,7 +1,7 @@
-#include "game/levels/Level2.h"
+#include "game/levels/L4_House.h"
 #include "game/objects/environment/House.h"
 
-void Level2::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
+void L4_House::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
   std::shared_ptr<House> house1(new House("three_room.bmp"));
   house1->pos = Vector3(0, 0, -20);
   objs.push_back(house1);
