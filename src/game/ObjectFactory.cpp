@@ -1,4 +1,5 @@
 #include "game/ObjectFactory.h"
+#include "core/engine/Engine.h"
 #include "game/objects/environment/Ground.h"
 #include "game/objects/props/Tunnel.h"
 
@@ -8,18 +9,7 @@ std::shared_ptr<Object> ObjectFactory::Create(const ObjectConfig& config) {
               << ", ID: " << config.id << "\n";
     try {
         if(config.type == "Tunnel") {
-            std::cout << "Posizione Tunnel: " << config.position[0] << ", "
-                      << config.position[1] << ", " << config.position[2] << "\n";
-            // Controllo parametri obbligatori
-            if(config.subtype.empty()) {
-                throw std::runtime_error("Tunnel senza subtype");
-            }
-
             auto tunnel = std::make_shared<Tunnel>(Tunnel::TypeFromString(config.subtype));
-
-            if (!tunnel->shader) {
-                throw std::runtime_error("Shader 'texture' non caricato per Tunnel");
-            }
 
             // Controllo dimensione position
             if(config.position.size() < 3) {
@@ -33,9 +23,36 @@ std::shared_ptr<Object> ObjectFactory::Create(const ObjectConfig& config) {
             }
             tunnel->scale = Vector3(config.scale[0], config.scale[1], config.scale[2]);
 
+            // Crea i portali per il tunnel
+            std::vector<std::shared_ptr<Portal>> tunnelPortals;
+            tunnel->CreatePortals(tunnelPortals, config.id);
+
+            // Registrazione connessioni
+            for(const auto& portalConfig : config.portals) {
+                int door = portalConfig["door"].as<int>();
+                std::string target = portalConfig["connects_to"].as<std::string>();
+
+                // Trova il portale corrispondente a questa porta
+                for(auto& portal : tunnelPortals) {
+                    if(portal->doorNumber == door) {
+                        size_t dotPos = target.find('.');
+                        portal->connectedTunnel = target.substr(0, dotPos);
+                        portal->connectedDoor = std::stoi(target.substr(dotPos + 5)); // "doorX"
+
+                        // Aggiungi alla lista di connessioni pendenti
+                        GH_ENGINE->AddPortalConnection(portal, portal->connectedTunnel, portal->connectedDoor);
+                    }
+                }
+            }
+
+            // Aggiungi i portali alla lista globale
+            for(auto& portal : tunnelPortals) {
+                GH_ENGINE->AddPortal(portal);
+            }
+
             return tunnel;
         }
-        else if(config.type == "Ground") {
+        if(config.type == "Ground") {
             std::cout << "Posizione Ground: " << config.position[0] << ", "
                       << config.position[1] << ", " << config.position[2] << "\n";
             bool slope = (config.subtype == "SLOPE");
@@ -46,7 +63,6 @@ std::shared_ptr<Object> ObjectFactory::Create(const ObjectConfig& config) {
             }
             return ground;
         }
-        // ... altri oggetti
 
     } catch(const std::exception& e) {
         std::cerr << "Errore creazione: " << e.what() << "\n";

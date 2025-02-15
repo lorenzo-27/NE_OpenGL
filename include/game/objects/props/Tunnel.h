@@ -1,5 +1,6 @@
 #pragma once
 #include "game/objects/base/Object.h"
+#include "game/objects/interactive/Portal.h"
 #include "resources/Resources.h"
 
 class Tunnel : public Object {
@@ -36,7 +37,7 @@ public:
     }
     explicit Tunnel(const std::string& typeStr) : Tunnel(TypeFromString(typeStr)) {}
 
-    virtual ~Tunnel() {
+    ~Tunnel() override {
     }
 
     void SetDoor1(Object &portal) const {
@@ -57,6 +58,21 @@ public:
             portal.pos = LocalToWorld().MulPoint(Vector3(0, 1, -1));
             portal.scale = Vector3(0.6f, 0.999f, 1) * scale.x;
         }
+    }
+
+    void CreatePortals(std::vector<std::shared_ptr<Portal>>& portals, const std::string& id) {
+        // Crea i portali per questo tunnel
+        auto portal1 = std::make_shared<Portal>();
+        SetDoor1(*portal1);
+        portal1->sourceTunnel = id;
+        portal1->doorNumber = 1;
+        portals.push_back(portal1);
+
+        auto portal2 = std::make_shared<Portal>();
+        SetDoor2(*portal2);
+        portal2->sourceTunnel = id;
+        portal2->doorNumber = 2;
+        portals.push_back(portal2);
     }
 
 private:

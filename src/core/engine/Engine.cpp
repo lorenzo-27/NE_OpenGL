@@ -101,6 +101,19 @@ void Engine::LoadScene(const std::string& levelName) {
     } catch(const std::exception& e) {
         std::cerr << "Errore caricamento livello: " << e.what() << "\n";
     }
+
+    // Fase 2: Collega i portali
+    for(auto& conn : pendingPortalConnections) {
+        for(auto& targetPortal : vPortals) {
+            if(targetPortal->sourceTunnel == conn.targetTunnel &&
+               targetPortal->doorNumber == conn.targetDoor)
+            {
+                Portal::Connect(conn.portal, targetPortal);
+                break;
+            }
+        }
+    }
+    pendingPortalConnections.clear();
 }
 
 void Engine::Update() const {

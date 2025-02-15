@@ -2,6 +2,7 @@ name: "Double Tunnel"
 player_start: [0, 1.5, 5]
 objects:
   - type: Tunnel
+    id: tunnel1
     subtype: NORMAL
     position: [-2.4, 0, -1.8]
     scale: [1, 1, 4.8]
@@ -16,6 +17,11 @@ objects:
     subtype: NORMAL
     position: [2.4, 0, 0]
     scale: [1, 1, 0.6]
+    portals:
+      - door: 1
+        connects_to: tunnel1.door1
+      - door: 2
+        connects_to: tunnel1.door2
 
   - type: Ground
     scale: [10, 10, 10]
