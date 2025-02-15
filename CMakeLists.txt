@@ -10,7 +10,7 @@ option(BUILD_TESTS "Build test cases" OFF)
 option(ENABLE_WARNINGS "Enable warning flags" ON)
 
 # Global settings
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -34,6 +34,7 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(SDL2 REQUIRED)
+find_package(yaml-cpp REQUIRED)
 
 # Include directories
 target_include_directories(${PROJECT_NAME}
@@ -43,6 +44,7 @@ target_include_directories(${PROJECT_NAME}
             ${OPENGL_INCLUDE_DIR}
             ${GLEW_INCLUDE_DIRS}
             ${SDL2_INCLUDE_DIRS}
+            ${YAML_CPP_INCLUDE_DIRS}
 )
 
 # Linking
@@ -51,6 +53,7 @@ target_link_libraries(${PROJECT_NAME}
             OpenGL::GL
             GLEW::GLEW
             SDL2::SDL2
+            yaml-cpp
 )
 
 # Assets copying

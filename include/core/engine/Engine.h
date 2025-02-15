@@ -8,6 +8,7 @@
 #include "Timer.h"
 #include "game/Scene.h"
 #include "game/objects/environment/Sky.h"
+#include "game/LevelManager.h"
 #include <GL/glew.h>
 #if defined(_WIN32)
   #include <windows.h>
@@ -25,7 +26,7 @@ public:
   int Run();
   void Update() const;
   void Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) const;
-  void LoadScene(int ix);
+  void LoadScene(const std::string &levelName);
 
 #if defined(_WIN32)
   LRESULT WindowProc(HWND hCurWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -79,6 +80,6 @@ private:
 
   GLint occlusionCullingSupported{};
 
-  std::vector<std::shared_ptr<Scene>> vScenes;
-  std::shared_ptr<Scene> curScene;
+  LevelManager levelManager;
+  std::shared_ptr<Scene> curScene = nullptr;
 };
