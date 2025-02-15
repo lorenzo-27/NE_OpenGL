@@ -94,8 +94,8 @@ GLuint Shader::LoadShader(const char *fname, GLenum type) {
         log.resize(logLength);
         glGetShaderInfoLog(id, logLength, &logLength, log.data());
 
-        std::ofstream fout(std::string(fname) + ".log");
-        fout.write(log.data(), logLength);
+        std::cerr << "ERROR: Shader " << fname << ":\n" << log.data() << "\n";
+
         return 0;
     }
 

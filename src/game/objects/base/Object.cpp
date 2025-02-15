@@ -17,14 +17,6 @@ void Object::Reset() {
 }
 
 void Object::Draw(const Camera &cam, uint32_t curFBO) {
-    if (!shader) {
-        std::cerr << "Oggetto non inizializzato correttamente! Mancano shader\n";
-        return;
-    }
-    if (!mesh) {
-        std::cerr << "Oggetto non inizializzato correttamente! Mancano mesh\n";
-        return;
-    }
     if (shader && mesh) {
         const Matrix4 mv = WorldToLocal().Transposed();
         const Matrix4 mvp = cam.Matrix() * LocalToWorld();

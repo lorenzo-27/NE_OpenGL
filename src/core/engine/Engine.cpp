@@ -88,6 +88,7 @@ void Engine::LoadScene(const std::string& levelName) {
         // Pulizia oggetti esistenti
         vObjects.clear();
         vPortals.clear();
+        player->Reset();
 
         // Carica gli oggetti dalla scena
         curScene->Load(config, vObjects, vPortals, *player);

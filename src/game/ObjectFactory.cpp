@@ -17,6 +17,10 @@ std::shared_ptr<Object> ObjectFactory::Create(const ObjectConfig& config) {
 
             auto tunnel = std::make_shared<Tunnel>(Tunnel::TypeFromString(config.subtype));
 
+            if (!tunnel->shader) {
+                throw std::runtime_error("Shader 'texture' non caricato per Tunnel");
+            }
+
             // Controllo dimensione position
             if(config.position.size() < 3) {
                 throw std::runtime_error("Position non valida per Tunnel");
