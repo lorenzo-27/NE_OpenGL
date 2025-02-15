@@ -85,14 +85,20 @@ void Engine::LoadScene(const std::string& levelName) {
             std::cerr << "Attenzione: livello senza oggetti!\n";
         }
 
+        // Pulizia oggetti esistenti
+        vObjects.clear();
+        vPortals.clear();
+
+        // Carica gli oggetti dalla scena
         curScene->Load(config, vObjects, vPortals, *player);
+
+        vObjects.push_back(player);
 
         std::cout << "Oggetti caricati: " << vObjects.size() << "\n";
         std::cout << "Portali caricati: " << vPortals.size() << "\n";
 
     } catch(const std::exception& e) {
         std::cerr << "Errore caricamento livello: " << e.what() << "\n";
-        // Gestione errore...
     }
 }
 

@@ -15,7 +15,7 @@ class Shader;
 class Object {
 public:
   Object();
-  virtual ~Object() {}
+  virtual ~Object() = default;
 
   virtual void Reset();
   virtual void Draw(const Camera& cam, uint32_t curFBO);
@@ -24,13 +24,13 @@ public:
 
   //Casts
   virtual Physical* AsPhysical() { return nullptr; }
-  const Physical* AsPhysical() const { return const_cast<Object*>(this)->AsPhysical(); }
+  [[nodiscard]] const Physical* AsPhysical() const { return const_cast<Object*>(this)->AsPhysical(); }
 
   void DebugDraw(const Camera& cam) const;
 
-  Matrix4 LocalToWorld() const;
-  Matrix4 WorldToLocal() const;
-  Vector3 Forward() const;
+  [[nodiscard]] Matrix4 LocalToWorld() const;
+  [[nodiscard]] Matrix4 WorldToLocal() const;
+  [[nodiscard]] Vector3 Forward() const;
 
   Vector3 pos;
   Vector3 euler;
