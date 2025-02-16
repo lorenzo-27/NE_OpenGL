@@ -32,6 +32,8 @@ Engine::Engine() {
     GH_PLAYER = player.get();
 
     levelManager.RegisterLevel("level1", "assets/levels/level1.yaml");
+    levelManager.RegisterLevel("level2", "assets/levels/level2.yaml");
+    levelManager.RegisterLevel("level3", "assets/levels/level3.yaml");
 
     curScene = std::make_shared<DefaultScene>();
     LoadScene("level1");
@@ -102,7 +104,7 @@ void Engine::LoadScene(const std::string& levelName) {
         std::cerr << "Errore caricamento livello: " << e.what() << "\n";
     }
 
-    // Fase 2: Collega i portali
+    // Fase di connessione avanzata
     for(auto& conn : pendingPortalConnections) {
         for(auto& targetPortal : vPortals) {
             if(targetPortal->sourceTunnel == conn.targetTunnel &&

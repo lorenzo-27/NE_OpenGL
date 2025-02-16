@@ -140,6 +140,12 @@ int Engine::EnterMessageLoop() {
         if (input.key_press['1']) {
             LoadScene("level1");
         }
+        if (input.key_press['2']) {
+            LoadScene("level2");
+        }
+        if (input.key_press['3']) {
+            LoadScene("level3");
+        }
 
         PeriodicRender(cur_ticks);
         SDL_GL_SwapWindow(window);
