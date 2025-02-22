@@ -1,5 +1,5 @@
 name: "Slope Challenge"
-player_start: [0, 0.5, 8]  # GH_PLAYER_HEIGHT - 2 = 1.5 - 2 = -0.5
+player_start: [0, -0.5, 8]  # GH_PLAYER_HEIGHT - 2 = 1.5 - 2 = -0.5
 objects:
   - type: Tunnel
     id: tunnel1
