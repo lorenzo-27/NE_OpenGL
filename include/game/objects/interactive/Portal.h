@@ -9,38 +9,48 @@
 
 class Portal : public Object {
 public:
-  //Subclass that represents a warp
-  struct Warp {
-    Warp(const Portal* fromPortal) : fromPortal(fromPortal), toPortal(nullptr) {
-      delta.MakeIdentity();
-      deltaInv.MakeIdentity();
+    //Subclass that represents a warp
+    struct Warp {
+        Warp(const Portal *fromPortal) : fromPortal(fromPortal), toPortal(nullptr) {
+            delta.MakeIdentity();
+            deltaInv.MakeIdentity();
+        }
+
+        Matrix4 delta;
+        Matrix4 deltaInv;
+        const Portal *fromPortal;
+        const Portal *toPortal;
+    };
+    std::string sourceTunnel;
+    int doorNumber;
+    std::string connectedTunnel;
+    int connectedDoor;
+
+    Portal();
+
+    ~Portal() override {
     }
 
-    Matrix4 delta;
-    Matrix4 deltaInv;
-    const Portal* fromPortal;
-    const Portal* toPortal;
-  };
+    virtual void Draw(const Camera &cam, GLuint curFBO) override;
 
-  Portal();
+    void DrawPink(const Camera &cam) const;
 
-  ~Portal() override {}
+    Vector3 GetBump(const Vector3 &a) const;
 
-  virtual void Draw(const Camera& cam, GLuint curFBO) override;
-  void DrawPink(const Camera& cam) const;
+    const Warp *Intersects(const Vector3 &a, const Vector3 &b, const Vector3 &bump) const;
 
-  Vector3 GetBump(const Vector3& a) const;
-  const Warp* Intersects(const Vector3& a, const Vector3& b, const Vector3& bump) const;
-  float DistTo(const Vector3& pt) const;
+    float DistTo(const Vector3 &pt) const;
 
-  static void Connect(const std::shared_ptr<Portal>& a, const std::shared_ptr<Portal>& b);
-  static void Connect(Warp& a, Warp& b);
+    static void Connect(const std::shared_ptr<Portal> &a, const std::shared_ptr<Portal> &b);
 
-  Warp front;
-  Warp back;
+    static void Connect(Warp &a, Warp &b);
+
+    Warp front;
+    Warp back;
 
 private:
-  std::shared_ptr<Shader> errShader;
-  FrameBuffer frameBuf[GH_MAX_RECURSION <= 1 ? 1 : GH_MAX_RECURSION - 1];
+    std::shared_ptr<Shader> errShader;
+    FrameBuffer frameBuf[GH_MAX_RECURSION <= 1 ? 1 : GH_MAX_RECURSION - 1];
 };
-typedef std::vector<std::shared_ptr<Portal>> PPortalVec;
+
+typedef std::vector<std::shared_ptr<Portal> > PPortalVec;
