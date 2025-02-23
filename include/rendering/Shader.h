@@ -1,7 +1,6 @@
 #pragma once
 #include <GL/glew.h>
 #include <string>
-#include <vector>
 
 class Shader {
 public:
@@ -14,7 +13,6 @@ public:
 private:
   GLuint LoadShader(const char* fname, GLenum type);
 
-  std::vector<std::string> attribs;
   GLuint vertId;
   GLuint fragId;
   GLuint progId;

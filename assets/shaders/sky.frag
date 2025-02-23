@@ -5,13 +5,11 @@ precision highp float;
 #define SUN_SIZE 0.002
 #define SUN_SHARPNESS 1.0
 
-//Inputs
 in vec3 ex_normal;
 
-//Outputs
 out vec4 FragColor;
 
-void main(void) {
+void main() {
 	vec3 n = normalize(ex_normal);
 
 	float h = (1.0 - n.y) * (1.0 - n.y) * 0.5;

@@ -1,13 +1,10 @@
 #version 330 core
 
-//Globals
+layout(location = 0) in vec3 in_pos;
+layout(location = 0) in vec2 in_uv;
+
 uniform mat4 mvp;
 
-//Inputs
-in vec3 in_pos;
-in vec2 in_uv;
-
-//Outputs
 out vec4 ex_uv;
 
 void main(void) {
