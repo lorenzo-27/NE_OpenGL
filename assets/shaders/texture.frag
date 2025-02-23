@@ -10,6 +10,6 @@ in vec3 ex_normal;
 out vec4 FragColor;
 
 void main() {
-	float s = dot(ex_normal, LIGHT)*0.5 + 0.5;
-	FragColor = vec4(texture(tex, ex_uv).rgb * s, 1.0);
+    float s = dot(ex_normal, LIGHT)*0.5 + 0.5;
+    FragColor = vec4(texture(tex, ex_uv).rgb * s, 1.0);
 }

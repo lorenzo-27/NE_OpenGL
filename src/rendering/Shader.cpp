@@ -4,7 +4,7 @@
 #include <sstream>
 
 Shader::Shader(const char *name) : vertId(0), fragId(0), progId(0),
-                                  mvpId(-1), mvId(-1) {
+                                   mvpId(-1), mvId(-1) {
     // Get file paths
     std::string vertPath = "assets/shaders/" + std::string(name) + ".vert";
     std::string fragPath = "assets/shaders/" + std::string(name) + ".frag";
@@ -13,7 +13,7 @@ Shader::Shader(const char *name) : vertId(0), fragId(0), progId(0),
     vertId = LoadShader(vertPath.c_str(), GL_VERTEX_SHADER);
     fragId = LoadShader(fragPath.c_str(), GL_FRAGMENT_SHADER);
 
-    if(!vertId || !fragId) {
+    if (!vertId || !fragId) {
         std::cerr << "Failed to load shaders: " << name << "\n";
         return;
     }
@@ -29,7 +29,7 @@ Shader::Shader(const char *name) : vertId(0), fragId(0), progId(0),
     // Check linking errors
     GLint success;
     glGetProgramiv(progId, GL_LINK_STATUS, &success);
-    if(!success) {
+    if (!success) {
         GLchar infoLog[512];
         glGetProgramInfoLog(progId, 512, nullptr, infoLog);
         std::cerr << "Shader linking failed (" << name << "):\n" << infoLog << "\n";
@@ -49,7 +49,7 @@ Shader::~Shader() {
 
 GLuint Shader::LoadShader(const char *fname, GLenum type) {
     std::ifstream file(fname);
-    if(!file.is_open()) {
+    if (!file.is_open()) {
         std::cerr << "Failed to open shader file: " << fname << "\n";
         return 0;
     }
@@ -57,7 +57,7 @@ GLuint Shader::LoadShader(const char *fname, GLenum type) {
     std::stringstream buffer;
     buffer << file.rdbuf();
     std::string content = buffer.str();
-    const char* source = content.c_str();
+    const char *source = content.c_str();
 
     GLuint shader = glCreateShader(type);
     glShaderSource(shader, 1, &source, nullptr);
@@ -65,7 +65,7 @@ GLuint Shader::LoadShader(const char *fname, GLenum type) {
 
     GLint success;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-    if(!success) {
+    if (!success) {
         GLchar infoLog[512];
         glGetShaderInfoLog(shader, 512, nullptr, infoLog);
         std::cerr << "Shader compilation failed (" << fname << "):\n" << infoLog << "\n";
@@ -80,10 +80,10 @@ void Shader::Use() const {
 }
 
 void Shader::SetMVP(const float *mvp, const float *mv) const {
-    if(mvpId != -1 && mvp) {
+    if (mvpId != -1 && mvp) {
         glUniformMatrix4fv(mvpId, 1, GL_TRUE, mvp);
     }
-    if(mvId != -1 && mv) {
+    if (mvId != -1 && mv) {
         glUniformMatrix4fv(mvId, 1, GL_TRUE, mv);
     }
 }

@@ -11,7 +11,7 @@ out vec2 ex_uv;
 out vec3 ex_normal;
 
 void main() {
-	gl_Position = mvp * vec4(in_pos, 1.0);
-	ex_uv = in_uv;
-	ex_normal = normalize((mv * vec4(in_normal, 0.0)).xyz);
+    gl_Position = mvp * vec4(in_pos, 1.0);
+    ex_uv = in_uv;
+    ex_normal = normalize((mv * vec4(in_normal, 0.0)).xyz);
 }

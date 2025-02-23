@@ -15,13 +15,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Warnings settings
-if(ENABLE_WARNINGS)
-    if(MSVC)
+if (ENABLE_WARNINGS)
+    if (MSVC)
         add_compile_options(/W4)
-    else()
+    else ()
         add_compile_options(-Wall -Wextra -Wpedantic)
-    endif()
-endif()
+    endif ()
+endif ()
 
 # Source files
 file(GLOB_RECURSE SOURCES "src/*.cpp")
@@ -39,21 +39,21 @@ find_package(yaml-cpp REQUIRED)
 # Include directories
 target_include_directories(${PROJECT_NAME}
         PUBLIC
-            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         PRIVATE
-            ${OPENGL_INCLUDE_DIR}
-            ${GLEW_INCLUDE_DIRS}
-            ${SDL2_INCLUDE_DIRS}
-            ${YAML_CPP_INCLUDE_DIRS}
+        ${OPENGL_INCLUDE_DIR}
+        ${GLEW_INCLUDE_DIRS}
+        ${SDL2_INCLUDE_DIRS}
+        ${YAML_CPP_INCLUDE_DIRS}
 )
 
 # Linking
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
-            OpenGL::GL
-            GLEW::GLEW
-            SDL2::SDL2
-            yaml-cpp
+        OpenGL::GL
+        GLEW::GLEW
+        SDL2::SDL2
+        yaml-cpp
 )
 
 # Assets copying

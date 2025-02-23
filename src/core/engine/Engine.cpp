@@ -73,7 +73,7 @@ void Engine::PeriodicRender(int64_t &cur_ticks) {
     Render(main_cam, 0, nullptr);
 }
 
-void Engine::LoadScene(const std::string& levelName) {
+void Engine::LoadScene(const std::string &levelName) {
     if (!curScene) {
         std::cerr << "ERRORE: Scena non inizializzata\n";
         return;
@@ -83,7 +83,7 @@ void Engine::LoadScene(const std::string& levelName) {
         std::cout << "Caricamento livello: " << config.name << "\n";
         std::cout << "Oggetti da caricare: " << config.objects.size() << "\n";
 
-        if(config.objects.empty()) {
+        if (config.objects.empty()) {
             std::cerr << "Attenzione: livello senza oggetti!\n";
         }
 
@@ -99,17 +99,15 @@ void Engine::LoadScene(const std::string& levelName) {
 
         std::cout << "Oggetti caricati: " << vObjects.size() << "\n";
         std::cout << "Portali caricati: " << vPortals.size() << "\n";
-
-    } catch(const std::exception& e) {
+    } catch (const std::exception &e) {
         std::cerr << "Errore caricamento livello: " << e.what() << "\n";
     }
 
     // Fase di connessione avanzata
-    for(auto& conn : pendingPortalConnections) {
-        for(auto& targetPortal : vPortals) {
-            if(targetPortal->sourceTunnel == conn.targetTunnel &&
-               targetPortal->doorNumber == conn.targetDoor)
-            {
+    for (auto &conn: pendingPortalConnections) {
+        for (auto &targetPortal: vPortals) {
+            if (targetPortal->sourceTunnel == conn.targetTunnel &&
+                targetPortal->doorNumber == conn.targetDoor) {
                 Portal::Connect(conn.portal, targetPortal);
                 break;
             }
@@ -167,10 +165,10 @@ void Engine::Update() const {
     }
 
     //Portals
-    for (const auto & vObject : vObjects) {
+    for (const auto &vObject: vObjects) {
         Physical *physical = vObject->AsPhysical();
         if (physical) {
-            for (const auto & vPortal : vPortals) {
+            for (const auto &vPortal: vPortals) {
                 if (physical->TryPortal(*vPortal)) {
                     break;
                 }
