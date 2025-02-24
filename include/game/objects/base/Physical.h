@@ -1,34 +1,38 @@
 #pragma once
+
 #include "game/objects/base/Object.h"
 #include "game/objects/interactive/Portal.h"
 #include "game/objects/props/Sphere.h"
 
 class Physical : public Object {
 public:
-  Physical();
-  virtual ~Physical() override {}
+	Physical();
 
-  virtual void Reset() override;
-  virtual void Update() override;
-  virtual void OnCollide(Object& other, const Vector3& push);
+	~Physical() override = default;
 
-  void SetPosition(const Vector3& _pos) {
-    pos = _pos;
-    prev_pos = _pos;
-  }
+	void Reset() override;
 
-  bool TryPortal(const Portal& portal);
+	void Update() override;
 
-  virtual Physical* AsPhysical() override { return this; }
+	virtual void OnCollide(Object &other, const Vector3 &push);
 
-  Vector3 gravity;
-  Vector3 velocity;
-  float bounce;
-  float friction;
-  float high_friction;
-  float drag;
-  
-  Vector3 prev_pos;
+	void SetPosition(const Vector3 &_pos) {
+		pos = _pos;
+		prev_pos = _pos;
+	}
 
-  std::vector<Sphere> hitSpheres;
+	bool TryPortal(const Portal &portal);
+
+	Physical *AsPhysical() override { return this; }
+
+	Vector3 gravity{};
+	Vector3 velocity{};
+	float bounce{};
+	float friction{};
+	float high_friction{};
+	float drag{};
+
+	Vector3 prev_pos{};
+
+	std::vector<Sphere> hitSpheres;
 };

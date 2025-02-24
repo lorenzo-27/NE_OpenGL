@@ -34,7 +34,8 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(SDL2 REQUIRED)
-find_package(yaml-cpp REQUIRED)
+
+set(YAML_CPP_DIR "/opt/homebrew/Cellar/yaml-cpp/0.8.0")
 
 # Include directories
 target_include_directories(${PROJECT_NAME}
@@ -44,7 +45,7 @@ target_include_directories(${PROJECT_NAME}
         ${OPENGL_INCLUDE_DIR}
         ${GLEW_INCLUDE_DIRS}
         ${SDL2_INCLUDE_DIRS}
-        ${YAML_CPP_INCLUDE_DIRS}
+        ${YAML_CPP_DIR}/include
 )
 
 # Linking
@@ -53,7 +54,7 @@ target_link_libraries(${PROJECT_NAME}
         OpenGL::GL
         GLEW::GLEW
         SDL2::SDL2
-        yaml-cpp
+        ${YAML_CPP_DIR}/lib/libyaml-cpp.dylib
 )
 
 # Assets copying

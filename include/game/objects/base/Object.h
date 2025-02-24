@@ -1,4 +1,5 @@
 #pragma once
+
 #include "core/engine/GameHeader.h"
 #include "core/math/Vector.h"
 #include "core/camera/Camera.h"
@@ -8,39 +9,50 @@
 
 //Forward declarations
 class Physical;
+
 class Mesh;
+
 class Texture;
+
 class Shader;
 
 class Object {
 public:
-  Object();
-  virtual ~Object() = default;
+	Object();
 
-  virtual void Reset();
-  virtual void Draw(const Camera& cam, uint32_t curFBO);
-  virtual void Update() {};
-  virtual void OnHit(Object& other, Vector3& push) {};
+	virtual ~Object() = default;
 
-  //Casts
-  virtual Physical* AsPhysical() { return nullptr; }
-  [[nodiscard]] const Physical* AsPhysical() const { return const_cast<Object*>(this)->AsPhysical(); }
+	virtual void Reset();
 
-  void DebugDraw(const Camera& cam) const;
+	virtual void Draw(const Camera &cam, uint32_t curFBO);
 
-  [[nodiscard]] Matrix4 LocalToWorld() const;
-  [[nodiscard]] Matrix4 WorldToLocal() const;
-  [[nodiscard]] Vector3 Forward() const;
+	virtual void Update() {};
 
-  Vector3 pos;
-  Vector3 euler;
-  Vector3 scale;
+	virtual void OnHit(Object &other, Vector3 &push) {};
 
-  // Physical scale, only updated by portal scale changes
-  float p_scale;
+	//Casts
+	virtual Physical *AsPhysical() { return nullptr; }
 
-  std::shared_ptr<Mesh> mesh;
-  std::shared_ptr<Texture> texture;
-  std::shared_ptr<Shader> shader;
+	[[nodiscard]] const Physical *AsPhysical() const { return const_cast<Object *>(this)->AsPhysical(); }
+
+	void DebugDraw(const Camera &cam) const;
+
+	[[nodiscard]] Matrix4 LocalToWorld() const;
+
+	[[nodiscard]] Matrix4 WorldToLocal() const;
+
+	[[nodiscard]] Vector3 Forward() const;
+
+	Vector3 pos;
+	Vector3 euler;
+	Vector3 scale;
+
+	// Physical scale, only updated by portal scale changes
+	float p_scale;
+
+	std::shared_ptr<Mesh> mesh;
+	std::shared_ptr<Texture> texture;
+	std::shared_ptr<Shader> shader;
 };
+
 typedef std::vector<std::shared_ptr<Object>> PObjectVec;

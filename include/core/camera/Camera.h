@@ -1,26 +1,28 @@
 #pragma once
+
 #include "core/math/Vector.h"
 
 class Camera {
 public:
-  Camera();
+	Camera();
 
-  Matrix4 InverseProjection() const;
+	[[nodiscard]] Matrix4 InverseProjection() const;
 
-  Matrix4 Matrix() const;
+	[[nodiscard]] Matrix4 Matrix() const;
 
-  void SetSize(int w, int h, float n, float f);
-  void SetPositionOrientation(const Vector3& pos, float rotX, float rotY);
+	void SetSize(int w, int h, float n, float f);
 
-  void UseViewport() const;
+	void SetPositionOrientation(const Vector3 &pos, float rotX, float rotY);
 
-  void ClipOblique(const Vector3& pos, const Vector3& normal);
+	void UseViewport() const;
 
-  Matrix4 projection;
-  Matrix4 worldView;
+	void ClipOblique(const Vector3 &pos, const Vector3 &normal);
 
-  int width;
-  int height;
-  float near;
-  float far;
+	Matrix4 projection;
+	Matrix4 worldView;
+
+	int width;
+	int height;
+	float near{};
+	float far{};
 };

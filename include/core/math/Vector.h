@@ -24,9 +24,9 @@ public:
     // Static factories
     [[nodiscard]] static constexpr Vector3 Zero() noexcept { return Vector3(0.0f); }
     [[nodiscard]] static constexpr Vector3 Ones() noexcept { return Vector3(1.0f); }
-    [[nodiscard]] static constexpr Vector3 UnitX() noexcept { return Vector3(1.0f, 0.0f, 0.0f); }
-    [[nodiscard]] static constexpr Vector3 UnitY() noexcept { return Vector3(0.0f, 1.0f, 0.0f); }
-    [[nodiscard]] static constexpr Vector3 UnitZ() noexcept { return Vector3(0.0f, 0.0f, 1.0f); }
+    [[nodiscard]] static constexpr Vector3 UnitX() noexcept { return {1.0f, 0.0f, 0.0f}; }
+    [[nodiscard]] static constexpr Vector3 UnitY() noexcept { return {0.0f, 1.0f, 0.0f}; }
+    [[nodiscard]] static constexpr Vector3 UnitZ() noexcept { return {0.0f, 0.0f, 1.0f}; }
 
     // Setters
     void Set(float _x, float _y, float _z) noexcept {
@@ -43,35 +43,35 @@ public:
 
     // Basic operations
     [[nodiscard]] Vector3 operator+(float b) const noexcept {
-        return Vector3(x + b, y + b, z + b);
+        return {x + b, y + b, z + b};
     }
 
     [[nodiscard]] Vector3 operator-(float b) const noexcept {
-        return Vector3(x - b, y - b, z - b);
+        return {x - b, y - b, z - b};
     }
 
     [[nodiscard]] Vector3 operator*(float b) const noexcept {
-        return Vector3(x * b, y * b, z * b);
+        return {x * b, y * b, z * b};
     }
 
     [[nodiscard]] Vector3 operator/(float b) const noexcept {
-        return Vector3(x / b, y / b, z / b);
+        return {x / b, y / b, z / b};
     }
 
     [[nodiscard]] Vector3 operator+(const Vector3 &b) const noexcept {
-        return Vector3(x + b.x, y + b.y, z + b.z);
+        return {x + b.x, y + b.y, z + b.z};
     }
 
     [[nodiscard]] Vector3 operator-(const Vector3 &b) const noexcept {
-        return Vector3(x - b.x, y - b.y, z - b.z);
+        return {x - b.x, y - b.y, z - b.z};
     }
 
     [[nodiscard]] Vector3 operator*(const Vector3 &b) const noexcept {
-        return Vector3(x * b.x, y * b.y, z * b.z);
+        return {x * b.x, y * b.y, z * b.z};
     }
 
     [[nodiscard]] Vector3 operator/(const Vector3 &b) const noexcept {
-        return Vector3(x / b.x, y / b.y, z / b.z);
+        return {x / b.x, y / b.y, z / b.z};
     }
 
     Vector3 &operator+=(float b) noexcept {
@@ -131,7 +131,7 @@ public:
     }
 
     [[nodiscard]] Vector3 operator-() const noexcept {
-        return Vector3(-x, -y, -z);
+        return {-x, -y, -z};
     }
 
     // Vector algebra
@@ -140,7 +140,7 @@ public:
     }
 
     [[nodiscard]] Vector3 Cross(const Vector3 &b) const noexcept {
-        return Vector3(y * b.z - z * b.y, z * b.x - x * b.z, x * b.y - y * b.x);
+        return {y * b.z - z * b.y, z * b.x - x * b.z, x * b.y - y * b.x};
     }
 
     [[nodiscard]] constexpr float MagSq() const noexcept {
@@ -193,7 +193,7 @@ public:
 };
 
 [[nodiscard]] inline Vector3 operator/(float b, const Vector3 &v) noexcept {
-    return Vector3(b / v.x, b / v.y, b / v.z);
+    return {b / v.x, b / v.y, b / v.z};
 }
 
 inline void operator/=(float b, Vector3 &v) noexcept {
@@ -213,16 +213,16 @@ public:
     constexpr Vector4(float x, float y, float z, float w) noexcept : x(x), y(y), z(z), w(w) {
     }
 
-    [[nodiscard]] Vector3 XYZ() const noexcept { return Vector3(x, y, z); }
+    [[nodiscard]] Vector3 XYZ() const noexcept { return {x, y, z}; }
     [[nodiscard]] Vector3 XYZNormalized() const { return XYZ().Normalized(); }
-    [[nodiscard]] Vector3 Homogenized() const noexcept { return Vector3(x / w, y / w, z / w); }
+    [[nodiscard]] Vector3 Homogenized() const noexcept { return {x / w, y / w, z / w}; }
 
     [[nodiscard]] Vector4 operator*(float b) const noexcept {
-        return Vector4(x * b, y * b, z * b, w * b);
+        return {x * b, y * b, z * b, w * b};
     }
 
     [[nodiscard]] Vector4 operator/(float b) const noexcept {
-        return Vector4(x / b, y / b, z / b, w / b);
+        return {x / b, y / b, z / b, w / b};
     }
 
     Vector4 &operator*=(float b) noexcept {
@@ -432,23 +432,23 @@ public:
 
     // Getters
     [[nodiscard]] Vector3 XAxis() const noexcept {
-        return Vector3(m[0], m[4], m[8]);
+        return {m[0], m[4], m[8]};
     }
 
     [[nodiscard]] Vector3 YAxis() const noexcept {
-        return Vector3(m[1], m[5], m[9]);
+        return {m[1], m[5], m[9]};
     }
 
     [[nodiscard]] Vector3 ZAxis() const noexcept {
-        return Vector3(m[2], m[6], m[10]);
+        return {m[2], m[6], m[10]};
     }
 
     [[nodiscard]] Vector3 Translation() const noexcept {
-        return Vector3(m[3], m[7], m[11]);
+        return {m[3], m[7], m[11]};
     }
 
     [[nodiscard]] Vector3 Scale() const noexcept {
-        return Vector3(m[0], m[5], m[10]);
+        return {m[0], m[5], m[10]};
     }
 
     // Setters

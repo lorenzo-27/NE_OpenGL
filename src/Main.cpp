@@ -1,6 +1,7 @@
 #if defined(_WIN32)
 #define _CRT_SECURE_NO_WARNINGS
 #endif
+
 #include "core/engine/Engine.h"
 
 #if defined(_WIN32)
@@ -25,9 +26,9 @@ int APIENTRY WinMain(HINSTANCE hCurrentInst, HINSTANCE hPreviousInst, LPSTR lpsz
 
 // --- non-Windows ----------------------------------------------------------
 
-int main(int argc, char** argv) {
-  Engine engine;
-  return engine.Run();
+int main(int argc, char **argv) {
+	Engine engine;
+	return engine.Run();
 }
 
 #endif
