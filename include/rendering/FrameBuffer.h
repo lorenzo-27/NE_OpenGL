@@ -16,8 +16,19 @@ public:
 
 	void Use() const;
 
+	// Delete copy constructor and assignment operator
+	FrameBuffer(const FrameBuffer &) = delete;
+
+	FrameBuffer &operator=(const FrameBuffer &) = delete;
+
 private:
 	GLuint texId{};
 	GLuint fbo{};
 	GLuint renderBuf{};
+
+	// Helper function to check if DSA is available
+	static bool HasDSASupport();
+
+	// Helper function to check framebuffer status
+	static bool CheckFramebufferStatus(GLuint framebuffer);
 };
