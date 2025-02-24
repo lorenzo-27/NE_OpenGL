@@ -35,7 +35,29 @@ find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(SDL2 REQUIRED)
 
-set(YAML_CPP_DIR "/opt/homebrew/Cellar/yaml-cpp/0.8.0")
+# Platform specific yaml-cpp configuration
+if (APPLE)
+    set(YAML_CPP_DIR "/opt/homebrew/Cellar/yaml-cpp/0.8.0")
+    target_include_directories(${PROJECT_NAME}
+            PRIVATE
+            ${YAML_CPP_DIR}/include
+    )
+    target_link_libraries(${PROJECT_NAME}
+            PRIVATE
+            ${YAML_CPP_DIR}/lib/libyaml-cpp.dylib
+    )
+else()
+    find_package(yaml-cpp REQUIRED)
+    target_include_directories(${PROJECT_NAME}
+            PRIVATE
+            ${YAML_CPP_INCLUDE_DIRS}
+    )
+    target_link_libraries(${PROJECT_NAME}
+            PRIVATE
+            yaml-cpp
+    )
+endif()
+
 
 # Include directories
 target_include_directories(${PROJECT_NAME}
@@ -45,7 +67,6 @@ target_include_directories(${PROJECT_NAME}
         ${OPENGL_INCLUDE_DIR}
         ${GLEW_INCLUDE_DIRS}
         ${SDL2_INCLUDE_DIRS}
-        ${YAML_CPP_DIR}/include
 )
 
 # Linking
@@ -54,7 +75,6 @@ target_link_libraries(${PROJECT_NAME}
         OpenGL::GL
         GLEW::GLEW
         SDL2::SDL2
-        ${YAML_CPP_DIR}/lib/libyaml-cpp.dylib
 )
 
 # Assets copying
