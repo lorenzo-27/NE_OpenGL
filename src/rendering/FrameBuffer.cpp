@@ -91,9 +91,7 @@ void FrameBuffer::Render(const Camera &cam, GLuint curFBO, const Portal *skipPor
 
 	if (HasDSASupport()) {
 		glBindFramebuffer(GL_FRAMEBUFFER, curFBO);
-		std::cout << "Using DSA" << std::endl;
 	} else {
 		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, curFBO);
-		std::cout << "Using legacy" << std::endl;
 	}
 }
