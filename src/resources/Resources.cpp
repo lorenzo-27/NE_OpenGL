@@ -29,10 +29,13 @@ std::shared_ptr<Shader> AcquireShader(const char *name) {
 	}
 }
 
-std::shared_ptr<Texture> AcquireTexture(const char *name, int rows, int cols) {
-	std::weak_ptr<Texture> &tex = textureMap[std::string(name)];
+std::shared_ptr<Texture> AcquireTexture(const char *name, int rows, int cols, TextureType type) {
+	// Create a unique key that includes texture type
+	std::string key = std::string(name) + "_" + std::to_string(static_cast<int>(type));
+
+	std::weak_ptr<Texture> &tex = textureMap[key];
 	if (tex.expired()) {
-		std::shared_ptr<Texture> newTex(new Texture(name, rows, cols));
+		std::shared_ptr<Texture> newTex(new Texture(name, rows, cols, type));
 		tex = newTex;
 		return newTex;
 	} else {
