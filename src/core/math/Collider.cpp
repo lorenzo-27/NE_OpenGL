@@ -1,5 +1,6 @@
 #include "core/math/Collider.h"
 #include "core/engine/GameHeader.h"
+#include "resources/Resources.h"
 #include "GL/glew.h"
 #include <cassert>
 #include <iostream>
@@ -45,23 +46,62 @@ bool Collider::Collide(const Matrix4 &localToUnit, Vector3 &delta) const {
 }
 
 void Collider::DebugDraw(const Camera &cam, const Matrix4 &objMat) const {
+	static GLuint vao = 0;
+	static GLuint vbo = 0;
+	static GLuint shader = 0;
+
+	// Initialize shader and buffers if needed (first call)
+	if (shader == 0) {
+		// Simple shader for debug lines
+		shader = AcquireShader("debug")->GetProgram();
+
+		// Create buffers
+		glGenVertexArrays(1, &vao);
+		glGenBuffers(1, &vbo);
+
+		glBindVertexArray(vao);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+		// Define vertex attribute layout
+		glEnableVertexAttribArray(0);  // position
+		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), (void*)0);
+
+		// Pre-allocate buffer for square vertices
+		glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(Vector4), nullptr, GL_DYNAMIC_DRAW);
+	}
+
+	// Calculate transformation matrix
+	const Matrix4 mvp = cam.Matrix() * objMat * mat;
+
+	// Define square vertices
+	const Vector4 vertices[4] = {
+			mvp * Vector4(1, 1, 0, 1),
+			mvp * Vector4(1, -1, 0, 1),
+			mvp * Vector4(-1, -1, 0, 1),
+			mvp * Vector4(-1, 1, 0, 1)
+	};
+
+	// Use our shader
+	glUseProgram(shader);
+
+	// Set color uniform (green)
+	GLint colorLoc = glGetUniformLocation(shader, "color");
+	if (colorLoc >= 0) {
+		glUniform3f(colorLoc, 0.0f, 1.0f, 0.0f);
+	}
+
+	// Depth test configuration
 	glDepthFunc(GL_ALWAYS);
-	glUseProgram(0);
-	glBegin(GL_LINE_LOOP);
-	glColor3f(0.0f, 1.0f, 0.0f);
 
-	const Matrix4 m = cam.Matrix() * objMat * mat;
+	// Update buffer with new vertices
+	glBindVertexArray(vao);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 
-	Vector4 v = m * Vector4(1, 1, 0, 1);
-	glVertex4f(v.x, v.y, v.z, v.w);
-	v = m * Vector4(1, -1, 0, 1);
-	glVertex4f(v.x, v.y, v.z, v.w);
-	v = m * Vector4(-1, -1, 0, 1);
-	glVertex4f(v.x, v.y, v.z, v.w);
-	v = m * Vector4(-1, 1, 0, 1);
-	glVertex4f(v.x, v.y, v.z, v.w);
+	// Draw the square outline
+	glDrawArrays(GL_LINE_LOOP, 0, 4);
 
-	glEnd();
+	// Restore depth test setting
 	glDepthFunc(GL_LESS);
 }
 

@@ -18,6 +18,10 @@ public:
 
 	bool LoadShaders();
 
+	GLuint GetProgram() const {
+		return progId;
+	}
+
 private:
 
 	static GLuint LoadGLSLShader(const char *fname, GLenum type);
