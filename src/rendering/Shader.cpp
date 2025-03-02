@@ -4,6 +4,7 @@
 #include <sstream>
 #include <filesystem>
 #include <chrono>
+#include <unordered_map>
 
 // File timestamp cache for hot-reloading
 struct ShaderFileInfo {
