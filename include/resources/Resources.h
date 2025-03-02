@@ -10,3 +10,7 @@ std::shared_ptr<Mesh> AcquireMesh(const char *name);
 std::shared_ptr<Shader> AcquireShader(const char *name);
 
 std::shared_ptr<Texture> AcquireTexture(const char *name, int rows = 1, int cols = 1);
+
+void CheckForShaderUpdates(bool forceReload = false);
+
+bool ReloadShader(const char *name);

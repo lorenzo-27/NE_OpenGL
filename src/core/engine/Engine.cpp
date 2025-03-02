@@ -121,26 +121,29 @@ void Engine::LoadScene(const std::string &levelName) {
 }
 
 void Engine::Update() const {
-	//Update
+	// Check for shader updates
+	CheckForShaderUpdates();
+
+	// Update
 	for (const auto &vObject: vObjects) {
 		assert(vObject.get());
 		vObject->Update();
 	}
 
-	//Collisions
-	//For each physics object
+	// Collisions
+	// For each physics object
 	for (size_t i = 0; i < vObjects.size(); ++i) {
 		Physical *physical = vObjects[i]->AsPhysical();
 		if (!physical) { continue; }
 		Matrix4 worldToLocal = physical->WorldToLocal();
 
-		//For each object to collide with
+		// For each object to collide with
 		for (size_t j = 0; j < vObjects.size(); ++j) {
 			if (i == j) { continue; }
 			Object &obj = *vObjects[j];
 			if (!obj.mesh) { continue; }
 
-			//For each hit sphere
+			// For each hit sphere
 			for (size_t s = 0; s < physical->hitSpheres.size(); ++s) {
 				//Brings point from colliders local coordinates to hit's local coordinates.
 				const Sphere &sphere = physical->hitSpheres[s];
@@ -148,7 +151,7 @@ void Engine::Update() const {
 				Matrix4 localToUnit = worldToUnit * obj.LocalToWorld();
 				Matrix4 unitToWorld = worldToUnit.Inverse();
 
-				//For each collider
+				// For each collider
 				for (size_t c = 0; c < obj.mesh->colliders.size(); ++c) {
 					Vector3 push{};
 					const Collider &collider = obj.mesh->colliders[c];
@@ -168,7 +171,7 @@ void Engine::Update() const {
 		}
 	}
 
-	//Portals
+	// Portals
 	for (const auto &vObject: vObjects) {
 		Physical *physical = vObject->AsPhysical();
 		if (physical) {
@@ -182,11 +185,11 @@ void Engine::Update() const {
 }
 
 void Engine::Render(const Camera &cam, GLuint curFBO, const Portal *skipPortal) const {
-	//Clear buffers
+	// Clear buffers
 	glClear(GL_DEPTH_BUFFER_BIT);
 	sky->Draw(cam);
 
-	//Create queries (if applicable)
+	// Create queries (if applicable)
 	GLuint queries[GH_MAX_PORTALS];
 	GLuint drawTest[GH_MAX_PORTALS];
 	assert(vPortals.size() <= GH_MAX_PORTALS);
@@ -194,14 +197,14 @@ void Engine::Render(const Camera &cam, GLuint curFBO, const Portal *skipPortal) 
 		glGenQueriesARB(static_cast<GLsizei>(vPortals.size()), queries);
 	}
 
-	//Draw scene
+	// Draw scene
 	for (const auto &vObject: vObjects) {
 		vObject->Draw(cam, curFBO);
 	}
 
-	//Draw portals if possible
+	// Draw portals if possible
 	if (GH_REC_LEVEL > 0) {
-		//Draw portals
+		// Draw portals
 		GH_REC_LEVEL -= 1;
 		if (occlusionCullingSupported && GH_REC_LEVEL > 0) {
 			glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
@@ -250,7 +253,7 @@ void Engine::InitGLObjects() {
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	//Basic global variables
+	// Basic global variables
 	glClearColor(0.6f, 0.9f, 1.0f, 1.0f);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
@@ -258,7 +261,7 @@ void Engine::InitGLObjects() {
 	glDepthFunc(GL_LESS);
 	glDepthMask(GL_TRUE);
 
-	//Check GL functionality
+	// Check GL functionality
 	glGetQueryiv(GL_SAMPLES_PASSED_ARB, GL_QUERY_COUNTER_BITS_ARB, &occlusionCullingSupported);
 
 	EnableVSync();

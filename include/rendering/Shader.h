@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include <string>
+#include <vector>
 
 class Shader {
 public:
@@ -13,12 +14,21 @@ public:
 
 	void SetMVP(const float *mvp, const float *mv) const;
 
+	bool CheckForUpdates();
+
+	bool LoadShaders();
+
 private:
-	static GLuint LoadShader(const char *fname, GLenum type);
+
+	static GLuint LoadGLSLShader(const char *fname, GLenum type);
+
+	static GLuint LoadSPIRVShader(const char *fname, GLenum type);
 
 	GLuint vertId;
 	GLuint fragId;
 	GLuint progId;
 	GLuint mvpId;
 	GLuint mvId;
+
+	std::string name;
 };

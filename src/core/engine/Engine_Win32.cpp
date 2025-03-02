@@ -51,6 +51,9 @@ LRESULT Engine::WindowProc(HWND hCurWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 	input.key_press[wParam & 0xFF] = true;
 	if (wParam == VK_Q) {
 	  PostQuitMessage(0);
+	} else if (wParam == VK_R) {
+	  CheckForShaderUpdates(true);
+	  std::cout << "Shader reloaded\n";
 	}
 	return 0;
 
@@ -263,15 +266,11 @@ int Engine::EnterMessageLoop() {
 	  ConfineCursor();
 
 	  if (input.key_press['1']) {
-		LoadScene(0);
+		LoadScene("level1");
 	  } else if (input.key_press['2']) {
-		LoadScene(1);
+		LoadScene("level2");
 	  } else if (input.key_press['3']) {
-		LoadScene(2);
-	  } else if (input.key_press['4']) {
-		LoadScene(3);
-	  } else if (input.key_press['5']) {
-		LoadScene(4);
+		LoadScene("level3");
 	  }
 
 	  PeriodicRender(cur_ticks);

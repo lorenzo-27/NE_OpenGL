@@ -117,6 +117,9 @@ int Engine::EnterMessageLoop() {
 					return 0;
 				} else if (keycode == SDLK_f) {
 					ToggleFullscreen();
+				} else if (keycode == SDLK_r) {
+					CheckForShaderUpdates(true);
+					std::cout << "Shader reloaded\n";
 				} else if (keycode >= 'a' && keycode <= 'z') {
 					input.key_press[toupper(keycode)] = true;
 					input.key[toupper(keycode)] = true;
