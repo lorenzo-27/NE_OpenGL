@@ -8,7 +8,7 @@ static constexpr char GH_CLASS[] = "NE_OpenGL";
 
 //General
 static constexpr float GH_PI = 3.141592653589793f;
-static constexpr int GH_MAX_PORTALS = 16;
+static constexpr int GH_MAX_PORTALS = 36;
 
 //Graphics
 static constexpr bool GH_START_FULLSCREEN = false;

@@ -41,8 +41,7 @@ public:
 
 	explicit Tunnel(const std::string &typeStr) : Tunnel(TypeFromString(typeStr)) {}
 
-	~Tunnel() override {
-	}
+	~Tunnel() override = default;
 
 	void SetDoor1(Object &portal) const {
 		portal.pos = LocalToWorld().MulPoint(Vector3(0, 1, 1));
@@ -64,8 +63,7 @@ public:
 		}
 	}
 
-	void CreatePortals(std::vector<std::shared_ptr<Portal>> &portals, const std::string &id) {
-		// Crea i portali per questo tunnel
+	void CreatePortals(std::vector<std::shared_ptr<Portal>> &portals, const std::string &id) const {
 		auto portal1 = std::make_shared<Portal>();
 		SetDoor1(*portal1);
 		portal1->sourceTunnel = id;

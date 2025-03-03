@@ -37,7 +37,7 @@ std::shared_ptr<Object> ObjectFactory::Create(const ObjectConfig &config) {
 			// Gestione connessioni
 			for (const auto &portalConfig: config.portals) {
 				int door = portalConfig["door"].as<int>();
-				std::string target = portalConfig["connects_to"].as<std::string>();
+				auto target = portalConfig["connects_to"].as<std::string>();
 
 				// Trova il portale corrispondente a questa porta
 				for (auto &portal: tunnelPortals) {
