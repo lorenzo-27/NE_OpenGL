@@ -35,12 +35,13 @@ Engine::Engine() {
 	player = std::make_shared<Player>();
 	GH_PLAYER = player.get();
 
-	levelManager.RegisterLevel("level1", "assets/levels/level1.yaml");
-	levelManager.RegisterLevel("level2", "assets/levels/level2.yaml");
-	levelManager.RegisterLevel("level3", "assets/levels/level3.yaml");
+	levelManager.RegisterLevel("l1-doubleTunnel", "assets/levels/l1-doubleTunnel.yaml");
+	levelManager.RegisterLevel("l2-slope", "assets/levels/l2-slope.yaml");
+	levelManager.RegisterLevel("l3-scale", "assets/levels/l3-scale.yaml");
+	levelManager.RegisterLevel("l4-doubleSlope", "assets/levels/l4-doubleSlope.yaml");
 
 	curScene = std::make_shared<DefaultScene>();
-	LoadScene("level1");
+	LoadScene("l1-doubleTunnel");
 
 	sky = std::make_shared<Sky>();
 }

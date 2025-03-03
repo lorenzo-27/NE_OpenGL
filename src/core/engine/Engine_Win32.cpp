@@ -266,11 +266,11 @@ int Engine::EnterMessageLoop() {
 	  ConfineCursor();
 
 	  if (input.key_press['1']) {
-		LoadScene("level1");
+		LoadScene("l1-doubleTunnel");
 	  } else if (input.key_press['2']) {
-		LoadScene("level2");
+		LoadScene("l2-slope");
 	  } else if (input.key_press['3']) {
-		LoadScene("level3");
+		LoadScene("l3-scale");
 	  }
 
 	  PeriodicRender(cur_ticks);

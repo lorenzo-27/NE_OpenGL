@@ -140,13 +140,16 @@ int Engine::EnterMessageLoop() {
 		}
 
 		if (input.key_press['1']) {
-			LoadScene("level1");
+			LoadScene("l1-doubleTunnel");
 		}
 		if (input.key_press['2']) {
-			LoadScene("level2");
+			LoadScene("l2-slope");
 		}
 		if (input.key_press['3']) {
-			LoadScene("level3");
+			LoadScene("l3-scale");
+		}
+		if (input.key_press['4']) {
+			LoadScene("l4-doubleSlope");
 		}
 
 		PeriodicRender(cur_ticks);
