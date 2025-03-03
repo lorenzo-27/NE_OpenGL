@@ -1,0 +1,111 @@
+name: "Double Slope"
+player_start: [0, 1.5, 1]
+objects:
+  ### Floor 1
+  # Scale 1
+  - type: Tunnel
+    id: tunnelN1
+    subtype: SCALE
+    position: [0, 0, -2]
+    scale: [1, 1, 2]
+    portals:
+      - door: 1
+        connects_to: tunnelF1.door1
+      - door: 2
+        connects_to: tunnelF1.door2
+
+  - type: Tunnel
+    id: tunnelF1
+    subtype: NORMAL
+    position: [200, 0, -2]
+    scale: [1, 1, 2]
+    portals:
+      - door: 1
+        connects_to: tunnelN1.door1
+      - door: 2
+        connects_to: tunnelN1.door2
+
+  - type: Ground
+    id: groundN
+    position: [0, 0, 0]
+    scale: [ 4, 4, 4 ]
+
+  - type: Ground
+    id: groundF
+    position: [ 200, 0, 0 ]
+    scale: [ 4, 4, 4 ]
+
+  # Slope 1
+  - type: Tunnel
+    id: tunnelS
+    subtype: SLOPE
+    position: [ 0, -0.5, -8 ]
+    scale: [ 0.5, 0.5, 1 ]
+    rotation: [ 0, 0, 0 ]
+    portals:
+      - door: 1
+        connects_to: tunnelS.door1
+      - door: 2
+        connects_to: tunnelS.door2
+
+  - type: Ground
+    id: groundS
+    subtype: SLOPE
+    position: [0, 0, -8]
+    scale: [4, 2, 4]
+    rotation: [ 0, 3.141592, 0 ]
+
+  # Slope 2
+  - type: Tunnel
+    id: tunnelS
+    subtype: SLOPE
+    position: [ 0, -0.5, -16 ]
+    scale: [ 0.5, 0.5, 1 ]
+    rotation: [ 0, 3.141592, 0 ]
+    portals:
+      - door: 1
+        connects_to: tunnelS.door1
+      - door: 2
+        connects_to: tunnelS.door2
+
+  - type: Ground
+    id: groundS
+    subtype: SLOPE
+    position: [0, 0, -16]
+    scale: [4, 2, 4]
+    rotation: [ 0, 0, 0 ]
+
+  # Scale 2
+  - type: Tunnel
+    id: tunnelN2
+    subtype: SCALE
+    position: [0, 0, -24]
+    scale: [1, 1, 2]
+    rotation: [ 0, 3.141592, 0 ]
+    portals:
+      - door: 1
+        connects_to: tunnelF2.door1
+      - door: 2
+        connects_to: tunnelF2.door2
+
+  - type: Tunnel
+    id: tunnelF2
+    subtype: NORMAL
+    position: [200, 0, -24]
+    scale: [1, 1, 2]
+    rotation: [0, 3.141592, 0]
+    portals:
+      - door: 1
+        connects_to: tunnelN2.door1
+      - door: 2
+        connects_to: tunnelN2.door2
+
+  - type: Ground
+    id: groundN
+    position: [0, 0, -24]
+    scale: [ 4, 4, 4 ]
+
+  - type: Ground
+    id: groundF
+    position: [ 200, 0, -24 ]
+    scale: [ 4, 4, 4 ]
