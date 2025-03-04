@@ -271,6 +271,10 @@ int Engine::EnterMessageLoop() {
 		LoadScene("l2-slope");
 	  } else if (input.key_press['3']) {
 		LoadScene("l3-scale");
+	  } else if (input.key_press['4']) {
+		LoadScene("l4-doubleSlope");
+	  } else if (input.key_press['5']) {
+		LoadScene("l5-puzzle");
 	  }
 
 	  PeriodicRender(cur_ticks);

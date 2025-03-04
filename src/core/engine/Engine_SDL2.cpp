@@ -151,6 +151,9 @@ int Engine::EnterMessageLoop() {
 		if (input.key_press['4']) {
 			LoadScene("l4-doubleSlope");
 		}
+		if (input.key_press['5']) {
+			LoadScene("l5-puzzle");
+		}
 
 		PeriodicRender(cur_ticks);
 		SDL_GL_SwapWindow(window);

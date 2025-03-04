@@ -39,6 +39,7 @@ Engine::Engine() {
 	levelManager.RegisterLevel("l2-slope", "assets/levels/l2-slope.yaml");
 	levelManager.RegisterLevel("l3-scale", "assets/levels/l3-scale.yaml");
 	levelManager.RegisterLevel("l4-doubleSlope", "assets/levels/l4-doubleSlope.yaml");
+	levelManager.RegisterLevel("l5-puzzle", "assets/levels/l5-puzzle.yaml");
 
 	curScene = std::make_shared<DefaultScene>();
 	LoadScene("l1-doubleTunnel");
