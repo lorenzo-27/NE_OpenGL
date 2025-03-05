@@ -43,6 +43,10 @@ std::shared_ptr<Object> ObjectFactory::Create(const ObjectConfig &config) {
 				for (auto &portal: tunnelPortals) {
 					if (portal->doorNumber == door) {
 						size_t dotPos = target.find('.');
+						if (dotPos == std::string::npos) {
+							std::cerr << "Formato connects_to non valido: " << target << std::endl;
+							continue;
+						}
 						portal->connectedTunnel = target.substr(0, dotPos);
 						portal->connectedDoor = std::stoi(target.substr(dotPos + 5)); // "doorX"
 

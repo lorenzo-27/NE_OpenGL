@@ -1,7 +1,6 @@
 name: "Double Slope"
 player_start: [0, 1.5, 1]
 objects:
-  ### Floor 1
   # Scale 1
   - type: Tunnel
     id: tunnelN1
