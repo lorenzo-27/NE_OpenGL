@@ -238,51 +238,63 @@ void Engine::DestroyGLWindow() {
 }
 
 int Engine::EnterMessageLoop() {
-  if (!hWnd || !hDC || !hRC) {
-	return 1;
-  }
+   if (!hWnd || !hDC || !hRC) {
+      return 1;
+   }
 
-  //Recieve events from this window
-  SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)this);
+   // Receive events from this window
+   SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)this);
 
-  //Setup the timer
-  ticks_per_step = timer.SecondsToTicks(GH_DT);
-  int64_t cur_ticks = timer.GetTicks();
-  GH_FRAME = 0;
+   // Setup the timer
+   ticks_per_step = timer.SecondsToTicks(GH_DT);
+   int64_t cur_ticks = timer.GetTicks();
+   GH_FRAME = 0;
 
-  //Game loop
-  MSG msg;
-  while (true) {
-	if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-	  //Handle windows messages
-	  if (msg.message == WM_QUIT) {
-		break;
-	  } else {
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	  }
-	} else {
-	  //Confine the cursor
-	  ConfineCursor();
+   // Game loop
+   while (true) {
+      // Poll events using adapter - exits loop if false returned (quit requested)
+      if (!input.PollEvents()) {
+         break;
+      }
 
-	  if (input.key_press['1']) {
-		LoadScene("l1-doubleTunnel");
-	  } else if (input.key_press['2']) {
-		LoadScene("l2-slope");
-	  } else if (input.key_press['3']) {
-		LoadScene("l3-scale");
-	  } else if (input.key_press['4']) {
-		LoadScene("l4-doubleSlope");
-	  } else if (input.key_press['5']) {
-		LoadScene("l5-puzzle");
-	  }
+      // Confine the cursor
+      ConfineCursor();
 
-	  PeriodicRender(cur_ticks);
-	  SwapBuffers(hDC);
-	}
-  }
+      // Process special keys
+      if (input.key_press['q']) {
+         break; // Exit the game loop
+      } else if (input.key_press['r']) {
+         CheckForShaderUpdates(true);
+         std::cout << "Shader reloaded\n";
+      } else if (input.key_press['f']) {
+         ToggleFullscreen();
+      } else if (input.key_press['w']) {
+		 player->MoveForward();
+	  } else if (input.key_press['a']) {
+		 player->MoveLeft();
+	  } else if (input.key_press['s']) {
+		 player->MoveBackward();
+	  } else if (input.key_press['d']) {
+		 player->MoveRight();
+	  } else if (input.key_press['1']) {
+         LoadScene("l1-doubleTunnel");
+      } else if (input.key_press['2']) {
+         LoadScene("l2-slope");
+      } else if (input.key_press['3']) {
+         LoadScene("l3-scale");
+      } else if (input.key_press['4']) {
+         LoadScene("l4-doubleSlope");
+      } else if (input.key_press['5']) {
+         LoadScene("l5-puzzle");
+      }
 
-  return 0;
+      PeriodicRender(cur_ticks);
+      SwapBuffers(hDC);
+
+      input.EndFrame();
+   }
+
+   return 0;
 }
 
 void Engine::EnableVSync() {

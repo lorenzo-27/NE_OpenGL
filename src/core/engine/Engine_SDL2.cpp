@@ -105,59 +105,40 @@ int Engine::EnterMessageLoop() {
 	int64_t cur_ticks = timer.GetTicks();
 	GH_FRAME = 0;
 
-	SDL_Event event;
+	// Game loop
 	while (true) {
-		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT) {
-				return 0;
-			} else if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
-				auto keycode = event.key.keysym.sym;
-				auto mod = event.key.keysym.mod;
-				if (keycode == SDLK_q) {
-					return 0;
-				} else if (keycode == SDLK_f) {
-					ToggleFullscreen();
-				} else if (keycode == SDLK_r) {
-					CheckForShaderUpdates(true);
-					std::cout << "Shader reloaded\n";
-				} else if (keycode >= 'a' && keycode <= 'z') {
-					input.key_press[toupper(keycode)] = true;
-					input.key[toupper(keycode)] = true;
-				} else if (keycode >= '0' && keycode <= '9') {
-					input.key_press[keycode] = true;
-					input.key[keycode] = true;
-				}
-			} else if (event.type == SDL_KEYUP) {
-				auto keycode = event.key.keysym.sym;
-				if (keycode >= 'a' && keycode <= 'z') {
-					input.key[toupper(keycode)] = false;
-				} else if (keycode >= '0' && keycode <= '9') {
-					input.key[keycode] = false;
-				}
-			} else if (event.type == SDL_MOUSEMOTION) {
-				input.UpdateRaw(event.motion.state, event.motion.xrel, event.motion.yrel);
-			}
+		// Poll events using adapter - exits loop if false returned (quit requested)
+		if (!input.PollEvents()) {
+			break;
 		}
 
-		if (input.key_press['1']) {
+		// Process special keys
+		if (input.key_press['q']) {
+			break; // Exit the game loop
+		} else if (input.key_press['r']) {
+			CheckForShaderUpdates(true);
+			std::cout << "Shader reloaded\n";
+		} else if (input.key_press['f']) {
+			ToggleFullscreen();
+		} else if (input.key_press['1']) {
 			LoadScene("l1-doubleTunnel");
-		}
-		if (input.key_press['2']) {
+		} else if (input.key_press['2']) {
 			LoadScene("l2-slope");
-		}
-		if (input.key_press['3']) {
+		} else if (input.key_press['3']) {
 			LoadScene("l3-scale");
-		}
-		if (input.key_press['4']) {
+		} else if (input.key_press['4']) {
 			LoadScene("l4-doubleSlope");
-		}
-		if (input.key_press['5']) {
+		} else if (input.key_press['5']) {
 			LoadScene("l5-puzzle");
 		}
 
 		PeriodicRender(cur_ticks);
 		SDL_GL_SwapWindow(window);
+
+		input.EndFrame();
 	}
+
+	return 0;
 }
 
 void Engine::ConfineCursor() {

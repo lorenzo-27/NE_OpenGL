@@ -1,18 +1,34 @@
 #include "core/input/Input.h"
+#include "core/input/InputAdapter.h"
 #include "core/engine/GameHeader.h"
 
 #if defined(_WIN32)
 #include <Windows.h>
 #else
-
 #include <SDL2/SDL.h>
-
 #endif
 
 #include <memory>
 
 Input::Input() {
 	memset(this, 0, sizeof(Input));
+}
+
+Input::~Input() {
+	// Adapter is owned by the Engine
+}
+
+void Input::SetAdapter(InputAdapter* adapter) {
+	this->adapter = adapter;
+}
+
+bool Input::PollEvents() {
+	if (adapter) {
+		bool shouldContinue = adapter->PollEvents();
+		adapter->UpdateInput(*this);
+		return shouldContinue;
+	}
+	return true;
 }
 
 void Input::EndFrame() {
@@ -27,32 +43,27 @@ void Input::EndFrame() {
 #if defined(_WIN32)
 
 void Input::UpdateRaw(const tagRAWINPUT* raw) {
-  static BYTE buffer[2048];
-  static UINT buffer_size = sizeof(buffer);
-
-  if (raw->header.dwType == RIM_TYPEMOUSE) {
-	if (raw->data.mouse.usFlags == MOUSE_MOVE_RELATIVE) {
-	  mouse_ddx += raw->data.mouse.lLastX;
-	  mouse_ddy += raw->data.mouse.lLastY;
-	}
-	if (raw->data.mouse.usButtonFlags & RI_MOUSE_LEFT_BUTTON_DOWN) {
-	  mouse_button[0] = true;
-	  mouse_button_press[0] = true;
-	}
-	if (raw->data.mouse.usButtonFlags & RI_MOUSE_MIDDLE_BUTTON_DOWN) {
-	  mouse_button[1] = true;
-	  mouse_button_press[1] = true;
-	}
-	if (raw->data.mouse.usButtonFlags & RI_MOUSE_RIGHT_BUTTON_DOWN) {
-	  mouse_button[2] = true;
-	  mouse_button_press[2] = true;
-	}
-	if (raw->data.mouse.usButtonFlags & RI_MOUSE_LEFT_BUTTON_UP) mouse_button[0] = false;
-	if (raw->data.mouse.usButtonFlags & RI_MOUSE_MIDDLE_BUTTON_UP) mouse_button[1] = false;
-	if (raw->data.mouse.usButtonFlags & RI_MOUSE_RIGHT_BUTTON_UP) mouse_button[2] = false;
-  } else if (raw->header.dwType == RIM_TYPEHID) {
-	//TODO:
-  }
+    if (raw->header.dwType == RIM_TYPEMOUSE) {
+        if (raw->data.mouse.usFlags == MOUSE_MOVE_RELATIVE) {
+            mouse_ddx += raw->data.mouse.lLastX;
+            mouse_ddy += raw->data.mouse.lLastY;
+        }
+        if (raw->data.mouse.usButtonFlags & RI_MOUSE_LEFT_BUTTON_DOWN) {
+            mouse_button[0] = true;
+            mouse_button_press[0] = true;
+        }
+        if (raw->data.mouse.usButtonFlags & RI_MOUSE_MIDDLE_BUTTON_DOWN) {
+            mouse_button[1] = true;
+            mouse_button_press[1] = true;
+        }
+        if (raw->data.mouse.usButtonFlags & RI_MOUSE_RIGHT_BUTTON_DOWN) {
+            mouse_button[2] = true;
+            mouse_button_press[2] = true;
+        }
+        if (raw->data.mouse.usButtonFlags & RI_MOUSE_LEFT_BUTTON_UP) mouse_button[0] = false;
+        if (raw->data.mouse.usButtonFlags & RI_MOUSE_MIDDLE_BUTTON_UP) mouse_button[1] = false;
+        if (raw->data.mouse.usButtonFlags & RI_MOUSE_RIGHT_BUTTON_UP) mouse_button[2] = false;
+    }
 }
 
 #else

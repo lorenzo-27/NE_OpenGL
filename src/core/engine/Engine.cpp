@@ -1,13 +1,14 @@
 #include "core/engine/Engine.h"
 #include "game/objects/base/Physical.h"
 #include "game/DefaultScene.h"
+#include "core/input/InputAdapter.h"
 
 #if defined(_WIN32)
 #include <GL/wglew.h>
+#include "core/input/WindowsInputAdapter.h"
 #else
-
 #include <GL/glew.h>
-
+#include "core/input/SDLInputAdapter.h"
 #endif
 
 #include <cmath>
@@ -29,6 +30,16 @@ Engine::Engine() {
 	isGood = InitOSWrapper();
 
 	CreateGLWindow();
+
+#if defined(_WIN32)
+	inputAdapter = std::make_unique<WindowsInputAdapter>(hWnd);
+#else
+	inputAdapter = std::make_unique<SDLInputAdapter>(window);
+#endif
+
+	inputAdapter->Initialize();
+	input.SetAdapter(inputAdapter.get());
+
 	InitGLObjects();
 	SetupInputs();
 

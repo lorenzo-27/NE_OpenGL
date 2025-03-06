@@ -23,6 +23,8 @@
 #include <memory>
 #include <vector>
 
+class InputAdapter;
+
 class Engine {
 public:
 	Engine();
@@ -118,4 +120,5 @@ private:
 
 	LevelManager levelManager;
 	std::shared_ptr<Scene> curScene = nullptr;
+	std::unique_ptr<InputAdapter> inputAdapter;
 };
