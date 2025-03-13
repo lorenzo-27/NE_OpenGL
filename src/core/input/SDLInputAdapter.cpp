@@ -1,3 +1,4 @@
+#if not defined(_WIN32)
 #include "core/input/SDLInputAdapter.h"
 #include "core/input/Input.h"
 #include "core/engine/GameHeader.h"
@@ -124,3 +125,4 @@ void SDLInputAdapter::UpdateInput(Input& input) {
 	// Clear the event queue now that we've processed them
 	pendingEvents.clear();
 }
+#endif

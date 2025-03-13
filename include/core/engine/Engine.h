@@ -14,10 +14,10 @@
 
 #if defined(_WIN32)
 #include <windows.h>
-#else
+#endif
 
+#if not defined(_WIN32)
 #include <SDL2/SDL.h>
-
 #endif
 
 #include <memory>
@@ -87,7 +87,8 @@ private:
 
 	LONG iWidth;         // window width
 	LONG iHeight;        // window height
-#else
+#endif
+#if not defined(_WIN32)
 	SDL_Window *window = nullptr;
 	SDL_GLContext glContext = nullptr;
 	int iWidth = 0;

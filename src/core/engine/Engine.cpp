@@ -6,7 +6,8 @@
 #if defined(_WIN32)
 #include <GL/wglew.h>
 #include "core/input/WindowsInputAdapter.h"
-#else
+#endif
+#if not defined(_WIN32)
 #include <GL/glew.h>
 #include "core/input/SDLInputAdapter.h"
 #endif
@@ -33,7 +34,8 @@ Engine::Engine() {
 
 #if defined(_WIN32)
 	inputAdapter = std::make_unique<WindowsInputAdapter>(hWnd);
-#else
+#endif
+#if not defined(_WIN32)
 	inputAdapter = std::make_unique<SDLInputAdapter>(window);
 #endif
 
@@ -249,13 +251,6 @@ void Engine::Render(const Camera &cam, GLuint curFBO, const Portal *skipPortal) 
 		}
 		GH_REC_LEVEL += 1;
 	}
-
-#if 0
-	//Debug draw colliders
-	for (size_t i = 0; i < vObjects.size(); ++i) {
-	  vObjects[i]->DebugDraw(cam);
-	}
-#endif
 }
 
 void Engine::InitGLObjects() {

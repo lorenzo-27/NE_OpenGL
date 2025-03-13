@@ -4,7 +4,8 @@
 
 #if defined(_WIN32)
 #include <Windows.h>
-#else
+#endif
+#if not defined(_WIN32)
 #include <SDL2/SDL.h>
 #endif
 
@@ -66,7 +67,9 @@ void Input::UpdateRaw(const tagRAWINPUT* raw) {
     }
 }
 
-#else
+#endif
+
+#if not defined(_WIN32)
 
 void Input::UpdateRaw(unsigned state, int mouse_x, int mouse_y) {
 	mouse_dx = static_cast<float>(mouse_x);

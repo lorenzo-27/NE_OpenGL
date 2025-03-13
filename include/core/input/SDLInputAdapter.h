@@ -1,5 +1,6 @@
 #pragma once
 
+#if not defined(_WIN32)
 #include "core/input/InputAdapter.h"
 #include <SDL2/SDL.h>
 #include <vector>
@@ -19,3 +20,4 @@ private:
 	bool quitRequested = false;
 	std::vector<SDL_Event> pendingEvents;
 };
+#endif

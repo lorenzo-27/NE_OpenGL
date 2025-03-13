@@ -1,5 +1,9 @@
 #pragma once
 
+#if defined(WIN32)
+	#include <winuser.h>
+#endif
+
 class InputAdapter;
 
 class Input {
@@ -13,7 +17,8 @@ public:
 
 #if defined(_WIN32)
 	void UpdateRaw(const tagRAWINPUT* raw);
-#else
+#endif
+#if not defined(_WIN32)
 	void UpdateRaw(unsigned state, int mouse_x, int mouse_y);
 #endif
 

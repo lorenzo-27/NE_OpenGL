@@ -1,3 +1,4 @@
+#if not defined(_WIN32)
 #include "core/engine/Engine.h"
 #include "game/objects/base/Physical.h"
 #include <SDL2/SDL.h>
@@ -144,3 +145,4 @@ int Engine::EnterMessageLoop() {
 void Engine::ConfineCursor() {
 	//not needed
 }
+#endif
