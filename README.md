@@ -236,7 +236,6 @@ Portal rendering happens recursively. When a portal is visible, the scene is ren
 *   **Shader Hot-Reloading:** Shaders can be modified and reloaded at runtime without restarting the application, simplifying development and experimentation.
 *   **Level Loading from YAML Files:** Levels are defined in YAML files, making it easy to create and modify new levels without having to recompile the code.
 *   **Modern OpenGL Usage:** Use of Vertex Array Objects (VAO), Vertex Buffer Objects (VBO), Framebuffer Objects (FBO), and GLSL/SPIR-V shaders.
-*   **Optimizations:** Use of SIMD (SSE2 on x86/x64 and NEON on ARM) for some operations (IDCT, resampling, YCbCr-to-RGB conversion).
 *   **Occlusion Culling:** Use of occlusion queries to avoid rendering invisible portals.
 *   **Open Source Code:** The code is released under MIT license (see [License](#license) section), allowing free use, modification, and distribution.
 * **SPIR-V Support:** Ability to use precompiled shaders in SPIR-V format to improve performance and portability.
